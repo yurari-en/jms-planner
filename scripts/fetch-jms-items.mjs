@@ -24,7 +24,9 @@ const MIN_LV = +arg('--min-level', '100');
 const API = 'https://maplestory.io/api';
 const CONCURRENCY = 6;
 
-const EXCLUDE_SUB = new Set(['Medal', 'Badge', 'Totem', 'Mechanical Heart', 'Dragon Equipment', 'Mechanic Equipment', 'Mount']);
+const EXCLUDE_SUB = new Set(['Badge', 'Totem', 'Mechanical Heart', 'Dragon Equipment', 'Mechanic Equipment', 'Mount']);
+// 'Medal' は勲章(Accessory)と戦士の補助武器「メダル」(Secondary Weapon)の両方に付くので、勲章だけ除外する
+const isExcluded = (it) => EXCLUDE_SUB.has(it.typeInfo.subCategory) || (it.typeInfo.subCategory === 'Medal' && it.typeInfo.category !== 'Secondary Weapon');
 const FOLDERS = ['Accessory', 'Cap', 'Cape', 'Coat', 'Glove', 'Longcoat', 'Pants', 'Ring', 'Shield', 'Shoes', 'Weapon'];
 const PROPS = ['reqLevel', 'bossReward', 'superiorEqp', 'setItemID', 'tuc', 'incSTR', 'incDEX', 'incINT', 'incLUK', 'incPAD', 'incMAD', 'incMHP', 'exceptUpgrade', 'onlyUpgrade', 'noPotential', 'fixedPotential', 'blockGoldHammer', 'cuttable', 'reqJob', 'only', 'equipTradeBlock'];
 
@@ -66,7 +68,7 @@ async function pool(items, n, fn) {
 
 async function main() {
   const list = await getJson(`${API}/JMS/${VER}/item?overallCategoryFilter=Equip&cashFilter=false&minLevelFilter=${MIN_LV}&maxLevelFilter=300`);
-  const items = list.filter((it) => !EXCLUDE_SUB.has(it.typeInfo.subCategory));
+  const items = list.filter((it) => !isExcluded(it));
   console.log(`list: ${list.length} → 対象 ${items.length}`);
 
   const want = new Set(items.map((i) => i.id)); const folderOf = {};

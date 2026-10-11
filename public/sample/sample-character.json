@@ -1,0 +1,853 @@
+{
+ "app": "jms-planner",
+ "version": 1,
+ "exportedAt": "2026-10-12T00:00:00.000Z",
+ "characters": [
+  {
+   "version": 1,
+   "id": "sample-hero-0001",
+   "name": "サンプル(架空の戦士)",
+   "jobId": "hero",
+   "level": 255,
+   "displayedCP": 38500000,
+   "stats": {
+    "STR": {
+     "final": 28500,
+     "pct": 166,
+     "nonPct": 9800
+    },
+    "DEX": {
+     "final": 3200,
+     "pct": 19,
+     "nonPct": 900
+    },
+    "INT": {
+     "final": 4,
+     "pct": 0,
+     "nonPct": 0
+    },
+    "LUK": {
+     "final": 4,
+     "pct": 0,
+     "nonPct": 0
+    }
+   },
+   "attack": {
+    "final": 3900,
+    "pct": 90
+   },
+   "dmgPct": 55,
+   "bossPct": 250,
+   "critDmgPct": 85,
+   "pctOther": {
+    "STR": 30,
+    "DEX": 0
+   },
+   "equips": [
+    {
+     "slot": "weapon",
+     "itemId": 1402251,
+     "star": 17,
+     "potential": {
+      "grade": "unique",
+      "lines": [
+       140,
+       102,
+       136
+      ],
+      "lineKr": [
+       "공격력 +9%",
+       "공격력 +6%",
+       "STR +9%"
+      ]
+     },
+     "additional": {
+      "grade": "unique",
+      "lines": [
+       140,
+       null,
+       null
+      ],
+      "lineKr": [
+       "공격력 +9%",
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 45,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 46,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 8,
+      "dmgPct": 0,
+      "hp": 0
+     },
+     "scrollAtt": 56
+    },
+    {
+     "slot": "secondary",
+     "itemId": 1352205,
+     "star": 0,
+     "potential": {
+      "grade": "unique",
+      "lines": [
+       140,
+       96,
+       null
+      ],
+      "lineKr": [
+       "공격력 +9%",
+       "STR +6%",
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "emblem",
+     "itemId": 1190301,
+     "star": 0,
+     "potential": {
+      "grade": "unique",
+      "lines": [
+       140,
+       96,
+       null
+      ],
+      "lineKr": [
+       "공격력 +9%",
+       "STR +6%",
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "hat",
+     "itemId": 1004422,
+     "star": 17,
+     "potential": {
+      "grade": "legendary",
+      "lines": [
+       180,
+       136,
+       159
+      ],
+      "lineKr": [
+       "STR +12%",
+       "STR +9%",
+       "최대 HP +9%"
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 36,
+      "dex": 16,
+      "int": 0,
+      "luk": 0,
+      "att": 4,
+      "matt": 0,
+      "allStatPct": 4,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "top",
+     "itemId": null,
+     "star": 0,
+     "potential": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "bottom",
+     "itemId": null,
+     "star": 0,
+     "potential": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "overall",
+     "itemId": 1053063,
+     "star": 17,
+     "potential": {
+      "grade": "unique",
+      "lines": [
+       136,
+       96,
+       159
+      ],
+      "lineKr": [
+       "STR +9%",
+       "STR +6%",
+       "최대 HP +9%"
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 44,
+      "dex": 18,
+      "int": 0,
+      "luk": 0,
+      "att": 4,
+      "matt": 0,
+      "allStatPct": 5,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "shoes",
+     "itemId": 1073030,
+     "star": 17,
+     "potential": {
+      "grade": "epic",
+      "lines": [
+       96,
+       null,
+       null
+      ],
+      "lineKr": [
+       "STR +6%",
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 27,
+      "dex": 12,
+      "int": 0,
+      "luk": 0,
+      "att": 3,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "gloves",
+     "itemId": 1082636,
+     "star": 17,
+     "potential": {
+      "grade": "unique",
+      "lines": [
+       136,
+       143,
+       159
+      ],
+      "lineKr": [
+       "STR +9%",
+       "올스탯 +6%",
+       "최대 HP +9%"
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 36,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 5,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "cape",
+     "itemId": 1102775,
+     "star": 15,
+     "potential": {
+      "grade": "epic",
+      "lines": [
+       96,
+       null,
+       null
+      ],
+      "lineKr": [
+       "STR +6%",
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 27,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 3,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "belt",
+     "itemId": 1132174,
+     "star": 10,
+     "potential": {
+      "grade": "epic",
+      "lines": [
+       96,
+       null,
+       null
+      ],
+      "lineKr": [
+       "STR +6%",
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 24,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "shoulder",
+     "itemId": 1152170,
+     "star": 10,
+     "potential": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "face",
+     "itemId": 1012757,
+     "star": 12,
+     "potential": {
+      "grade": "epic",
+      "lines": [
+       96,
+       null,
+       null
+      ],
+      "lineKr": [
+       "STR +6%",
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 24,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 3,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "eye",
+     "itemId": 1022232,
+     "star": 12,
+     "potential": {
+      "grade": "unique",
+      "lines": [
+       136,
+       null,
+       null
+      ],
+      "lineKr": [
+       "STR +9%",
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 21,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "earrings",
+     "itemId": 1032200,
+     "star": 12,
+     "potential": {
+      "grade": "epic",
+      "lines": [
+       96,
+       null,
+       null
+      ],
+      "lineKr": [
+       "STR +6%",
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 24,
+      "dex": 12,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "pendant1",
+     "itemId": 1122150,
+     "star": 12,
+     "potential": {
+      "grade": "epic",
+      "lines": [
+       96,
+       null,
+       null
+      ],
+      "lineKr": [
+       "STR +6%",
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 24,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "pendant2",
+     "itemId": 1122443,
+     "star": 10,
+     "potential": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "ring1",
+     "itemId": 1113055,
+     "star": 12,
+     "potential": {
+      "grade": "epic",
+      "lines": [
+       96,
+       null,
+       null
+      ],
+      "lineKr": [
+       "STR +6%",
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "ring2",
+     "itemId": 1113313,
+     "star": 10,
+     "potential": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "ring3",
+     "itemId": 1113149,
+     "star": 8,
+     "potential": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "ring4",
+     "itemId": null,
+     "star": 0,
+     "potential": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 0,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    },
+    {
+     "slot": "pocket",
+     "itemId": 1162025,
+     "star": 0,
+     "potential": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "additional": {
+      "grade": "none",
+      "lines": [
+       null,
+       null,
+       null
+      ]
+     },
+     "flame": {
+      "str": 32,
+      "dex": 0,
+      "int": 0,
+      "luk": 0,
+      "att": 0,
+      "matt": 0,
+      "allStatPct": 4,
+      "bossPct": 0,
+      "dmgPct": 0,
+      "hp": 0
+     }
+    }
+   ],
+   "updatedAt": "2026-10-12T00:00:00.000Z"
+  }
+ ]
+}
