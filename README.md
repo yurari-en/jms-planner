@@ -136,11 +136,21 @@ npm run build
 
 ## GitHub Pages への配信
 
+### 前提(2026-10-12 に確認)
+
+- **無料プランでは非公開リポジトリで GitHub Pages を使えません**(API が `Your current plan does not support GitHub Pages for this repository` を返す)。
+  公開リポジトリにするか、Pages が使えるプランにしてください。公開にする場合、ソースと装備アイコン(NEXON 権利物)も公開されます。
+- `gh` のトークンにワークフローファイルを push する権限(`workflow` スコープ)が必要です。無い場合は次を実行してブラウザで承認します。
+
+```bash
+gh auth refresh -h github.com -s workflow
+```
+
 ### 最短手順(GitHub CLI `gh` にログイン済みの場合)
 
 ```bash
 # リポジトリ作成 + push(非公開でも Pages のURLは公開になる点に注意)
-gh repo create jms-planner --private --source . --remote origin --push
+gh repo create jms-planner --public --source . --remote origin --push   # 既に作成済みなら: git push -u origin main
 # Pages のソースを GitHub Actions にする
 gh api --method POST repos/{owner}/jms-planner/pages -f build_type=workflow
 # ワークフローの実行状況
