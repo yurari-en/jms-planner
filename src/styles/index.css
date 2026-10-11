@@ -12,6 +12,7 @@
   --color-text: 26 26 46; /* #1a1a2e */
   --color-muted: 98 98 122; /* #62627a */
   --color-accent: 139 124 246; /* #8b7cf6 */
+  --color-accent-strong: 100 82 230; /* #6452e6: 白文字で 5.4:1 のコントラスト(主ボタン用) */
   --color-eff-green: 52 211 153; /* #34d399 */
   --color-eff-purple: 167 139 250; /* #a78bfa */
   --color-eff-yellow: 251 191 36; /* #fbbf24 */

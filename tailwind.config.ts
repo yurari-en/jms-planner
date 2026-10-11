@@ -16,6 +16,7 @@ export default {
         text: token('text'),
         muted: token('muted'),
         accent: token('accent'), // #8b7cf6
+        accentStrong: token('accent-strong'), // #6452e6(主ボタンの背景。白文字で 4.5:1 以上)
         effGreen: token('eff-green'), // #34d399
         effPurple: token('eff-purple'), // #a78bfa
         effYellow: token('eff-yellow'), // #fbbf24

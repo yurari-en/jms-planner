@@ -44,6 +44,14 @@ function slotOf(it) {
   return 'other';
 }
 
+// wz のプロパティ値は数値でも文字列("123")で返ることがある → 数値に正規化(数値にできなければ undefined)
+function num(v) {
+  if (typeof v === 'number') return Number.isFinite(v) ? v : undefined;
+  if (typeof v === 'boolean') return v ? 1 : 0;
+  if (typeof v === 'string' && v.trim() !== '' && Number.isFinite(Number(v))) return Number(v);
+  return undefined;
+}
+
 async function getJson(url, tries = 4) {
   for (let i = 0; i < tries; i++) {
     try {
@@ -85,7 +93,7 @@ async function main() {
     const o = {};
     for (const p of (info?.children ?? []).filter((c) => PROPS.includes(c))) {
       const v = await getJson(`${base}/${p}`);
-      o[p] = v?.value;
+      o[p] = num(v?.value);
     }
     meta[it.id] = o;
   });

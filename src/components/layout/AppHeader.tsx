@@ -34,7 +34,7 @@ export default function AppHeader() {
         <Button
           size="sm"
           onClick={toggleTheme}
-          aria-label="テーマ切替"
+          aria-label={theme === 'dark' ? 'ライトテーマにする' : 'ダークテーマにする'}
           title={theme === 'dark' ? 'ライトテーマにする' : 'ダークテーマにする'}
         >
           <span aria-hidden="true">{theme === 'dark' ? '☀' : '☾'}</span>
