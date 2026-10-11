@@ -1,47 +1,58 @@
-import { useState } from 'react';
-
-type Theme = 'dark' | 'light';
-
-const UI_KEY = 'jmsplanner:v1:ui';
-
-function currentTheme(): Theme {
-  return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-}
-
-function applyTheme(theme: Theme): void {
-  document.documentElement.classList.toggle('dark', theme === 'dark');
-  try {
-    localStorage.setItem(UI_KEY, JSON.stringify({ version: 1, theme }));
-  } catch {
-    // localStorage が使えない環境(プライベートモード等)では保存しない
-  }
-}
+import { useEffect } from 'react';
+import InputTab from './components/input/InputTab';
+import AppHeader from './components/layout/AppHeader';
+import CharacterHeader from './components/layout/CharacterHeader';
+import DataGate from './components/layout/DataGate';
+import FirstRun from './components/layout/FirstRun';
+import { panelId, tabId } from './components/layout/tabDefs';
+import Tabs from './components/layout/Tabs';
+import Toasts from './components/layout/Toasts';
+import PlanTab from './components/plan/PlanTab';
+import SettingsTab from './components/settings/SettingsTab';
+import { useCharactersStore } from './store/characters';
+import { consumeRecoveredKeys } from './store/persist';
+import { useToastStore } from './store/toast';
+import { useUiStore } from './store/ui';
 
 export default function App() {
-  const [theme, setTheme] = useState<Theme>(currentTheme);
+  const tab = useUiStore((s) => s.tab);
+  const hasCharacters = useCharactersStore((s) => Object.keys(s.characters).length > 0);
 
-  const toggleTheme = () => {
-    const next: Theme = theme === 'dark' ? 'light' : 'dark';
-    applyTheme(next);
-    setTheme(next);
-  };
+  // 読めなかった保存データを退避した場合に知らせる
+  useEffect(() => {
+    for (const r of consumeRecoveredKeys()) {
+      useToastStore
+        .getState()
+        .push(
+          r.backupKey
+            ? `保存データ(${r.key})の一部が読めなかったため、${r.backupKey} に退避して初期化しました。`
+            : `保存データ(${r.key})の一部が読めなかったため初期化しました。`,
+          'warn',
+        );
+    }
+  }, []);
 
   return (
-    <div className="min-h-screen bg-bg text-text">
-      <header className="flex items-center justify-between gap-3 border-b border-border bg-surface px-4 py-3">
-        <h1 className="text-base font-bold sm:text-lg">JMS 装備強化順序プランナー</h1>
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="rounded-md border border-border bg-surface2 px-3 py-1.5 text-sm hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          aria-label={theme === 'dark' ? 'ライトテーマに切り替え' : 'ダークテーマに切り替え'}
+    <div className="flex min-h-screen min-w-0 flex-col bg-bg text-text">
+      <AppHeader />
+      <main className="mx-auto w-full min-w-0 max-w-5xl flex-1 space-y-3 px-3 py-3 sm:px-4">
+        {hasCharacters ? <CharacterHeader /> : <FirstRun />}
+        <Tabs />
+        <div
+          role="tabpanel"
+          id={panelId(tab)}
+          aria-labelledby={tabId(tab)}
+          tabIndex={0}
+          className="min-w-0 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
-          {theme === 'dark' ? 'ライト' : 'ダーク'}
-        </button>
-      </header>
-      <main className="mx-auto max-w-5xl px-4 py-6">
-        <p className="text-muted">準備中です。</p>
+          <DataGate>
+            {tab === 'plan' && <PlanTab />}
+            {tab === 'input' && <InputTab />}
+            {tab === 'settings' && <SettingsTab />}
+          </DataGate>
+        </div>
       </main>
+      <Toasts />
     </div>
   );
 }

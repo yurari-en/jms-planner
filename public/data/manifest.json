@@ -1,6 +1,6 @@
 {
- "version": "efc0badf09",
- "generatedAt": "2026-10-11T21:28:25.106Z",
+ "version": "ea4565a104",
+ "generatedAt": "2026-10-11T21:43:49.062Z",
  "files": {
   "cubes.json": {
    "sha": "40340a11",
@@ -18,8 +18,8 @@
    "asOf": "2026-10-12"
   },
   "potential/kms-cube-tables.json": {
-   "sha": "f24896be",
-   "bytes": 103387,
+   "sha": "c148e10b",
+   "bytes": 223874,
    "asOf": "2026-10-11"
   },
   "starforce.json": {
