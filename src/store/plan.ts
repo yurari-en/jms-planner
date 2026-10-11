@@ -20,13 +20,15 @@ export interface PlanState {
   lastInputKey: string;
   /** Worker を作って(1回だけ)マスタを渡し、再計算を予約する */
   attachData: (data: MasterData) => Promise<void>;
-  /** 300ms デバウンスで再計算 */
-  requestRecompute: () => void;
+  /** デバウンスして再計算(既定 300ms。設定のトグル等の離散操作は短くする) */
+  requestRecompute: (delayMs?: number) => void;
   /** デバウンスを待たずに再計算(force なら同じ入力でも計算する) */
   recomputeNow: (force?: boolean) => Promise<void>;
 }
 
 export const RECOMPUTE_DEBOUNCE_MS = 300;
+/** 設定(トグル・セレクト)の変更は連続入力ではないので短い待ちで投げる(入力→表示 0.5 秒以内のため) */
+export const SETTINGS_DEBOUNCE_MS = 60;
 
 let client: PlannerClient | null = null;
 let clientReady: Promise<void> | null = null;
@@ -62,12 +64,12 @@ export const usePlanStore = create<PlanState>()((set, get) => ({
     }
   },
 
-  requestRecompute: () => {
+  requestRecompute: (delayMs = RECOMPUTE_DEBOUNCE_MS) => {
     if (timer !== null) clearTimeout(timer);
     timer = setTimeout(() => {
       timer = null;
       void get().recomputeNow();
-    }, RECOMPUTE_DEBOUNCE_MS);
+    }, delayMs);
   },
 
   recomputeNow: async (force = false) => {
@@ -126,7 +128,7 @@ export function startPlanSync(): () => void {
   const unsubSettings = useSettingsStore.subscribe((s) => {
     if (s.settings !== lastSettings) {
       lastSettings = s.settings;
-      usePlanStore.getState().requestRecompute();
+      usePlanStore.getState().requestRecompute(SETTINGS_DEBOUNCE_MS);
     }
   });
   return () => {
