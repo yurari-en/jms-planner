@@ -136,6 +136,22 @@ npm run build
 
 ## GitHub Pages への配信
 
+### 最短手順(GitHub CLI `gh` にログイン済みの場合)
+
+```bash
+# リポジトリ作成 + push(非公開でも Pages のURLは公開になる点に注意)
+gh repo create jms-planner --private --source . --remote origin --push
+# Pages のソースを GitHub Actions にする
+gh api --method POST repos/{owner}/jms-planner/pages -f build_type=workflow
+# ワークフローの実行状況
+gh run watch
+# 公開URL: https://<ユーザー名>.github.io/jms-planner/
+```
+
+既に Pages が有効なリポジトリでは 2 行目は `--method PUT` で `build_type=workflow` に更新します。
+
+### 手動手順
+
 1. GitHub に空のリポジトリを作り(例 `jms-planner`)、このディレクトリの中身を push します(`main` ブランチ)。
 2. リポジトリの **Settings → Pages → Build and deployment → Source** を **GitHub Actions** にします。
 3. `main` に push すると `.github/workflows/deploy.yml` が `npm ci → lint → test → build → deploy` を実行します。
