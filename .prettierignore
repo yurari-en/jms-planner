@@ -1,0 +1,11 @@
+dist
+node_modules
+public
+package-lock.json
+*.md
+docs
+data
+tests/reference
+tests/fixtures
+coverage
+scripts

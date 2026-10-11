@@ -1,0 +1,935 @@
+{
+ "_meta": {
+  "description": "JMS 全職業リスト(日本語名・系統・主ステ/副ステ・攻撃力/魔力)。戦闘力/ダメージ計算用。",
+  "asOf": "2026-10-12",
+  "jobCount": 50,
+  "sources": [
+   "https://kawaii-sushi.com/maplestory/job/class-ranking/ (JP攻略: JMS全50職の日本語名)",
+   "https://thewiki.kr/w/메이플스토리%2F스탯 (KR攻略: 主/副ステ、DA/ゼノン式)",
+   "https://strategywiki.org/wiki/MapleStory/Formulas (英語圏: 主/副ステ表、武器係数)",
+   "https://maplestory.nexon.co.jp/gameguide/growth/status/ (JP公式: STR/DEX/INT/LUKの職業系統)"
+  ],
+  "notes": [
+   "statFormula: standard = (主ステ*4 + 副ステ合計)。secondary が2つある職(シャドー/デュアルブレイド/カデナ/カーリー/虎影)は STR と DEX の両方を副ステとして加算。",
+   "xenon = (STR+DEX+LUK)*4 (副ステなし)。戦闘力にはさらに未公開の職業補正定数が掛かる(maplestorywiki.net Combat Power)。",
+   "demonAvenger = floor(純HP/3.5) + 0.8*floor(追加HP/3.5) + STR。STRが副ステ。戦闘力にはさらに未公開の職業補正定数が掛かる。",
+   "attackType: att=攻撃力(物理), matt=魔力",
+   "kmsAbbr はKMS略称(KMSデータ参照用)。リン/レン/虎影等の日本語名はJP攻略サイト表記に準拠。",
+   "weaponMultiplier は参考値(ダメージ計算用、戦闘力では武器種補正が別途あり)。複数武器職は代表値。"
+  ],
+  "avgCdrSource": "KR攻略 インベン 2026-03-25 Lv290+・換算9万+ KMSキャラの職業別平均クール減(秒) https://www.inven.co.kr/board/maple/5974/6404304",
+  "cdrLinesPerSecDefaultFormula": null,
+  "cdrLinesPer2SecFormula": "帽子クール減2秒 = レジェ主ステ%最大値の何行分か。clamp(0.5刻みに丸め(0.85×(平均クール減秒−1.1)), 0, 2.5)。msuplannerの既定(ビショップ0.5行/隠月1.5行/火毒2.5行)に合わせて較正。KMS未実装職(ハヤト/カンナ/リン)は1.0行"
+ },
+ "jobs": [
+  {
+   "id": "hero",
+   "nameJa": "ヒーロー",
+   "kmsName": "히어로",
+   "branch": "冒険家",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.44,
+   "avgCdrSecKMS": 3.0,
+   "cdrLinesPer2Sec": 1.5
+  },
+  {
+   "id": "paladin",
+   "nameJa": "パラディン",
+   "kmsName": "팔라딘",
+   "branch": "冒険家",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.34,
+   "avgCdrSecKMS": 2.72,
+   "cdrLinesPer2Sec": 1.5
+  },
+  {
+   "id": "darkknight",
+   "nameJa": "ダークナイト",
+   "kmsName": "다크나이트",
+   "branch": "冒険家",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.49,
+   "avgCdrSecKMS": 4.9,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "archmage_fp",
+   "nameJa": "アークメイジ（火・毒）",
+   "kmsName": "아크메이지(불,독)",
+   "branch": "冒険家",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.2,
+   "avgCdrSecKMS": 4.76,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "archmage_il",
+   "nameJa": "アークメイジ（氷・雷）",
+   "kmsName": "아크메이지(썬,콜)",
+   "branch": "冒険家",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.2,
+   "avgCdrSecKMS": 1.62,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "bishop",
+   "nameJa": "ビショップ",
+   "kmsName": "비숍",
+   "branch": "冒険家",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.2,
+   "avgCdrSecKMS": 1.69,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "bowmaster",
+   "nameJa": "ボウマスター",
+   "kmsName": "보우마스터",
+   "branch": "冒険家",
+   "category": "弓使い",
+   "mainStat": [
+    "DEX"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 0.62,
+   "cdrLinesPer2Sec": 0.0
+  },
+  {
+   "id": "marksman",
+   "nameJa": "クロスボウマスター",
+   "kmsName": "신궁",
+   "branch": "冒険家",
+   "category": "弓使い",
+   "mainStat": [
+    "DEX"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.35,
+   "avgCdrSecKMS": 0.64,
+   "cdrLinesPer2Sec": 0.0
+  },
+  {
+   "id": "pathfinder",
+   "nameJa": "パスファインダー",
+   "kmsName": "패스파인더",
+   "branch": "冒険家",
+   "category": "弓使い",
+   "mainStat": [
+    "DEX"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 3.94,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "nightlord",
+   "nameJa": "ナイトロード",
+   "kmsName": "나이트로드",
+   "branch": "冒険家",
+   "category": "盗賊",
+   "mainStat": [
+    "LUK"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.75,
+   "avgCdrSecKMS": 1.47,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "shadower",
+   "nameJa": "シャドー",
+   "kmsName": "섀도어",
+   "branch": "冒険家",
+   "category": "盗賊",
+   "mainStat": [
+    "LUK"
+   ],
+   "subStat": [
+    "DEX",
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 3.38,
+   "cdrLinesPer2Sec": 2.0
+  },
+  {
+   "id": "dualblade",
+   "nameJa": "デュアルブレイド",
+   "kmsName": "듀얼블레이드",
+   "branch": "冒険家",
+   "category": "盗賊",
+   "mainStat": [
+    "LUK"
+   ],
+   "subStat": [
+    "DEX",
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 4.66,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "viper",
+   "nameJa": "バイパー",
+   "kmsName": "바이퍼",
+   "branch": "冒険家",
+   "category": "海賊",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.7,
+   "avgCdrSecKMS": 1.15,
+   "cdrLinesPer2Sec": 0.0
+  },
+  {
+   "id": "captain",
+   "nameJa": "キャプテン",
+   "kmsName": "캡틴",
+   "branch": "冒険家",
+   "category": "海賊",
+   "mainStat": [
+    "DEX"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.5,
+   "avgCdrSecKMS": 1.48,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "cannoneer",
+   "nameJa": "キャノンシューター",
+   "kmsName": "캐논마스터",
+   "branch": "冒険家",
+   "category": "海賊",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.5,
+   "avgCdrSecKMS": 2.61,
+   "cdrLinesPer2Sec": 1.5
+  },
+  {
+   "id": "dawnwarrior",
+   "nameJa": "ソウルマスター",
+   "kmsName": "소울마스터",
+   "branch": "シグナス騎士団",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.34,
+   "avgCdrSecKMS": 1.84,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "mihile",
+   "nameJa": "ミハエル",
+   "kmsName": "미하일",
+   "branch": "シグナス騎士団",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.24,
+   "avgCdrSecKMS": 2.51,
+   "cdrLinesPer2Sec": 1.0
+  },
+  {
+   "id": "blazewizard",
+   "nameJa": "フレイムウィザード",
+   "kmsName": "플레임위자드",
+   "branch": "シグナス騎士団",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.2,
+   "avgCdrSecKMS": 4.31,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "windarcher",
+   "nameJa": "ウィンドシューター",
+   "kmsName": "윈드브레이커",
+   "branch": "シグナス騎士団",
+   "category": "弓使い",
+   "mainStat": [
+    "DEX"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 4.44,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "nightwalker",
+   "nameJa": "ナイトウォーカー",
+   "kmsName": "나이트워커",
+   "branch": "シグナス騎士団",
+   "category": "盗賊",
+   "mainStat": [
+    "LUK"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.75,
+   "avgCdrSecKMS": 1.77,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "thunderbreaker",
+   "nameJa": "ストライカー",
+   "kmsName": "스트라이커",
+   "branch": "シグナス騎士団",
+   "category": "海賊",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.7,
+   "avgCdrSecKMS": 1.75,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "aran",
+   "nameJa": "アラン",
+   "kmsName": "아란",
+   "branch": "英雄",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.49,
+   "avgCdrSecKMS": 0.72,
+   "cdrLinesPer2Sec": 0.0
+  },
+  {
+   "id": "evan",
+   "nameJa": "エヴァン",
+   "kmsName": "에반",
+   "branch": "英雄",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.2,
+   "avgCdrSecKMS": 2.56,
+   "cdrLinesPer2Sec": 1.0
+  },
+  {
+   "id": "luminous",
+   "nameJa": "ルミナス",
+   "kmsName": "루미너스",
+   "branch": "英雄",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.2,
+   "avgCdrSecKMS": 4.25,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "mercedes",
+   "nameJa": "メルセデス",
+   "kmsName": "메르세데스",
+   "branch": "英雄",
+   "category": "弓使い",
+   "mainStat": [
+    "DEX"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 2.38,
+   "cdrLinesPer2Sec": 1.0
+  },
+  {
+   "id": "phantom",
+   "nameJa": "ファントム",
+   "kmsName": "팬텀",
+   "branch": "英雄",
+   "category": "盗賊",
+   "mainStat": [
+    "LUK"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 4.8,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "shade",
+   "nameJa": "隠月",
+   "kmsName": "은월",
+   "branch": "英雄",
+   "category": "海賊",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.7,
+   "avgCdrSecKMS": 2.84,
+   "cdrLinesPer2Sec": 1.5
+  },
+  {
+   "id": "demonslayer",
+   "nameJa": "デーモンスレイヤー",
+   "kmsName": "데몬슬레이어",
+   "branch": "レジスタンス",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.34,
+   "avgCdrSecKMS": 1.46,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "demonavenger",
+   "nameJa": "デーモンアヴェンジャー",
+   "kmsName": "데몬어벤져",
+   "branch": "レジスタンス",
+   "category": "戦士",
+   "mainStat": [
+    "HP"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "demonAvenger",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 2.11,
+   "cdrLinesPer2Sec": 1.0
+  },
+  {
+   "id": "blaster",
+   "nameJa": "ブラスター",
+   "kmsName": "블래스터",
+   "branch": "レジスタンス",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.7,
+   "avgCdrSecKMS": 1.28,
+   "cdrLinesPer2Sec": 0.0
+  },
+  {
+   "id": "battlemage",
+   "nameJa": "バトルメイジ",
+   "kmsName": "배틀메이지",
+   "branch": "レジスタンス",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.2,
+   "avgCdrSecKMS": 1.77,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "wildhunter",
+   "nameJa": "ワイルドハンター",
+   "kmsName": "와일드헌터",
+   "branch": "レジスタンス",
+   "category": "弓使い",
+   "mainStat": [
+    "DEX"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.35,
+   "avgCdrSecKMS": 4.31,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "mechanic",
+   "nameJa": "メカニック",
+   "kmsName": "메카닉",
+   "branch": "レジスタンス",
+   "category": "海賊",
+   "mainStat": [
+    "DEX"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.5,
+   "avgCdrSecKMS": 4.78,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "xenon",
+   "nameJa": "ゼノン",
+   "kmsName": "제논",
+   "branch": "レジスタンス",
+   "category": "盗賊/海賊",
+   "mainStat": [
+    "STR",
+    "DEX",
+    "LUK"
+   ],
+   "subStat": [],
+   "attackType": "att",
+   "statFormula": "xenon",
+   "weaponMultiplier": 1.3125,
+   "avgCdrSecKMS": 3.46,
+   "cdrLinesPer2Sec": 2.0
+  },
+  {
+   "id": "hayato",
+   "nameJa": "ハヤト",
+   "kmsName": "하야토",
+   "branch": "その他(日本独自)",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.25,
+   "avgCdrSecKMS": null,
+   "cdrNote": "KMS未実装職のため平均値なし。既定は0.15行/秒(全職中央値相当)",
+   "cdrLinesPer2Sec": 1.0
+  },
+  {
+   "id": "kanna",
+   "nameJa": "カンナ",
+   "kmsName": "칸나",
+   "branch": "その他(日本独自)",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.35,
+   "avgCdrSecKMS": null,
+   "cdrNote": "KMS未実装職のため平均値なし。既定は0.15行/秒(全職中央値相当)",
+   "cdrLinesPer2Sec": 1.0
+  },
+  {
+   "id": "kaiser",
+   "nameJa": "カイザー",
+   "kmsName": "카이저",
+   "branch": "ノヴァ",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.34,
+   "avgCdrSecKMS": 4.17,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "kain",
+   "nameJa": "カイン",
+   "kmsName": "카인",
+   "branch": "ノヴァ",
+   "category": "弓使い",
+   "mainStat": [
+    "DEX"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 2.13,
+   "cdrLinesPer2Sec": 1.0
+  },
+  {
+   "id": "cadena",
+   "nameJa": "カデナ",
+   "kmsName": "카데나",
+   "branch": "ノヴァ",
+   "category": "盗賊",
+   "mainStat": [
+    "LUK"
+   ],
+   "subStat": [
+    "DEX",
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 4.14,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "angelicbuster",
+   "nameJa": "エンジェリックバスター",
+   "kmsName": "엔젤릭버스터",
+   "branch": "ノヴァ",
+   "category": "海賊",
+   "mainStat": [
+    "DEX"
+   ],
+   "subStat": [
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.7,
+   "avgCdrSecKMS": 3.56,
+   "cdrLinesPer2Sec": 2.0
+  },
+  {
+   "id": "adele",
+   "nameJa": "アデル",
+   "kmsName": "아델",
+   "branch": "レフ",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 4.07,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "illium",
+   "nameJa": "イリウム",
+   "kmsName": "일리움",
+   "branch": "レフ",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.2,
+   "avgCdrSecKMS": 2.1,
+   "cdrLinesPer2Sec": 1.0
+  },
+  {
+   "id": "khali",
+   "nameJa": "カーリー",
+   "kmsName": "칼리",
+   "branch": "レフ",
+   "category": "盗賊",
+   "mainStat": [
+    "LUK"
+   ],
+   "subStat": [
+    "DEX",
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 4.18,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "ark",
+   "nameJa": "アーク",
+   "kmsName": "아크",
+   "branch": "レフ",
+   "category": "海賊",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.7,
+   "avgCdrSecKMS": 2.49,
+   "cdrLinesPer2Sec": 1.0
+  },
+  {
+   "id": "ren",
+   "nameJa": "レン",
+   "kmsName": "렌",
+   "branch": "アニマ",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": null,
+   "avgCdrSecKMS": 3.41,
+   "cdrLinesPer2Sec": 2.0
+  },
+  {
+   "id": "lara",
+   "nameJa": "ララ",
+   "kmsName": "라라",
+   "branch": "アニマ",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.2,
+   "avgCdrSecKMS": 1.71,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "hoyoung",
+   "nameJa": "虎影",
+   "kmsName": "호영",
+   "branch": "アニマ",
+   "category": "盗賊",
+   "mainStat": [
+    "LUK"
+   ],
+   "subStat": [
+    "DEX",
+    "STR"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.3,
+   "avgCdrSecKMS": 1.44,
+   "cdrLinesPer2Sec": 0.5
+  },
+  {
+   "id": "zero",
+   "nameJa": "ゼロ",
+   "kmsName": "제로",
+   "branch": "超越者",
+   "category": "戦士",
+   "mainStat": [
+    "STR"
+   ],
+   "subStat": [
+    "DEX"
+   ],
+   "attackType": "att",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.34,
+   "notes": "戦闘力ではβ(サブ武器)の基本ステ等が一部除外(maplestorywiki.net)",
+   "avgCdrSecKMS": 3.95,
+   "cdrLinesPer2Sec": 2.5
+  },
+  {
+   "id": "kinesis",
+   "nameJa": "キネシス",
+   "kmsName": "키네시스",
+   "branch": "その他(フレンズワールド)",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": 1.2,
+   "avgCdrSecKMS": 2.14,
+   "cdrLinesPer2Sec": 1.0
+  },
+  {
+   "id": "lynn",
+   "nameJa": "リン",
+   "kmsName": "린",
+   "branch": "その他",
+   "category": "魔法使い",
+   "mainStat": [
+    "INT"
+   ],
+   "subStat": [
+    "LUK"
+   ],
+   "attackType": "matt",
+   "statFormula": "standard",
+   "weaponMultiplier": null,
+   "avgCdrSecKMS": null,
+   "cdrNote": "KMS未実装職のため平均値なし。既定は0.15行/秒(全職中央値相当)",
+   "cdrLinesPer2Sec": 1.0
+  }
+ ]
+}

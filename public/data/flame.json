@@ -1,0 +1,545 @@
+{
+ "meta": {
+  "topic": "追加オプション(転生の炎/추가옵션/Bonus Stats)",
+  "checked": "2026-10-12",
+  "basis": "JMS非公開のためKMS公式確率を基準。unconfirmed配列参照",
+  "sources": {
+   "kms_probability": "https://maplestory.nexon.com/Guide/OtherProbability/game/gameAddOption",
+   "kms_meso_reset_2026_03_19": "https://maplestory.nexon.com/news/update/799",
+   "kms_uniform_2021_02_19": "https://maplestory.nexon.com/News/Notice/Notice/133192",
+   "namu_formulas": "https://namu.wiki/w/추가옵션",
+   "namu_weapon_table": "https://namu.wiki/w/메이플스토리/시스템/추가옵션",
+   "strategywiki": "https://strategywiki.org/wiki/MapleStory/Bonus_Stats",
+   "whackybeanz": "https://www.whackybeanz.com/guides/flames",
+   "jms_enhance_guide": "https://maplestory.nexon.co.jp/gameguide/item/enhance/",
+   "jms_ver396": "https://maplestory.nexon.co.jp/notice/view/953299/",
+   "kawaii_sushi_flame": "https://kawaii-sushi.com/maplestory/item/reincarnation-flame/",
+   "kawaii_sushi_crown": "https://kawaii-sushi.com/maplestory/event/crown-showcase/",
+   "wikiwiki_mapleinm": "https://wikiwiki.jp/mapleinm/転生の炎",
+   "nekonote2": "https://nekonote2.net/archives/503",
+   "github_bat1120": "https://github.com/bat1120/maple-optimizer/blob/main/engine/enhance/flame.py",
+   "github_ottojaa": "https://github.com/ottojaa/maplestory-calculators/blob/main/flames.py",
+   "github_xenogents": "https://github.com/Xenogents/maplestory-calculators/tree/main/flame-calculator"
+  }
+ },
+ "flames": {
+  "powerful": {
+   "jms": "強力な転生の炎",
+   "kms": "강력한 환생의 불꽃",
+   "gms": "Powerful/Crimson Rebirth Flame",
+   "tierTable": "powerful",
+   "canKeepOld": false,
+   "jmsAvailable": true
+  },
+  "blazing": {
+   "jms": null,
+   "kms": "타오르는 환생의 불꽃",
+   "gms": null,
+   "tierTable": "powerful",
+   "canKeepOld": true,
+   "jmsAvailable": "unconfirmed",
+   "note": "KMS 2026-03-19新規"
+  },
+  "eternal": {
+   "jms": "永遠の転生の炎",
+   "kms": "영원한 환생의 불꽃",
+   "gms": "Eternal/Rainbow Rebirth Flame",
+   "tierTable": "eternal",
+   "canKeepOld": false,
+   "jmsAvailable": true,
+   "jmsSince": "2022-12-14"
+  },
+  "black": {
+   "jms": "黒い転生の炎",
+   "kms": "검은 환생의 불꽃",
+   "gms": "Black Rebirth Flame",
+   "tierTable": "eternal",
+   "canKeepOld": true,
+   "jmsAvailable": "listed in auto-reset 2026-09-16 (fan source); acquisition unconfirmed"
+  },
+  "abyss": {
+   "jms": "深淵の転生の炎",
+   "kms": "심연의 환생의 불꽃",
+   "gms": "Abyssal Rebirth Flame",
+   "tierTable": "abyss",
+   "canKeepOld": true,
+   "jmsAvailable": true
+  },
+  "mesoReset": {
+   "jms": "メル再設定(統合強化UI 追加オプション再設定)",
+   "kms": "추가옵션 재설정(메소)",
+   "gms": "Meso reset (v.271)",
+   "tierTable": "eternal",
+   "canKeepOld": true,
+   "costMesoKMS": 3000000,
+   "costMesoJMS": null,
+   "jmsAvailable": "yes since ~2026-09 (fan source); cost/probability unconfirmed"
+  },
+  "leveled": {
+   "jms": "転生の炎110/120/130/140/150",
+   "kms": "환생의 불꽃(레벨)",
+   "note": "追加オプション無し(〇)装備にのみ使用。分布未確定"
+  }
+ },
+ "tierProbBase_1to5": {
+  "drop": [
+   0.25,
+   0.3,
+   0.3,
+   0.14,
+   0.01
+  ],
+  "powerful": [
+   0.2,
+   0.3,
+   0.36,
+   0.14,
+   0.0
+  ],
+  "eternal": [
+   0.0,
+   0.29,
+   0.45,
+   0.25,
+   0.01
+  ],
+  "abyss": [
+   0.0,
+   0.0,
+   0.63,
+   0.34,
+   0.03
+  ],
+  "craftNormal": [
+   0.5,
+   0.4,
+   0.1,
+   0.0,
+   0.0
+  ],
+  "craftArtisan": [
+   0.15,
+   0.3,
+   0.4,
+   0.14,
+   0.01
+  ],
+  "craftMeister": [
+   0.0,
+   0.19,
+   0.5,
+   0.3,
+   0.01
+  ],
+  "fuseArtisan": [
+   0.25,
+   0.35,
+   0.3,
+   0.1,
+   0.0
+  ],
+  "fuseMeister": [
+   0.0,
+   0.4,
+   0.45,
+   0.14,
+   0.01
+  ],
+  "carvingChanceTime": [
+   0.0,
+   0.3,
+   0.5,
+   0.19,
+   0.01
+  ]
+ },
+ "bossTierBonus": 2,
+ "lineCountProb": {
+  "boss": {
+   "4": 1.0
+  },
+  "flameNonBoss": {
+   "1": 0.4,
+   "2": 0.4,
+   "3": 0.16,
+   "4": 0.04
+  },
+  "craftArtisan": {
+   "1": 0.21,
+   "2": 0.5,
+   "3": 0.25,
+   "4": 0.04
+  },
+  "craftMeister": {
+   "1": 0.0,
+   "2": 0.56,
+   "3": 0.4,
+   "4": 0.04
+  },
+  "other": {
+   "1": 0.41,
+   "2": 0.4,
+   "3": 0.15,
+   "4": 0.04
+  },
+  "_jmsFanClaim_unadopted": {
+   "1": 0.45,
+   "2": 0.35,
+   "3": 0.15,
+   "4": 0.05
+  }
+ },
+ "optionSelection": {
+  "uniform": true,
+  "withoutReplacement": true,
+  "tierIndependentPerLine": true,
+  "rerollIfIdenticalToCurrent": true
+ },
+ "optionPools": {
+  "weapon": [
+   "STR",
+   "DEX",
+   "INT",
+   "LUK",
+   "STR_DEX",
+   "STR_INT",
+   "STR_LUK",
+   "DEX_INT",
+   "DEX_LUK",
+   "INT_LUK",
+   "HP",
+   "MP",
+   "REQ_LV",
+   "DEF",
+   "ATT",
+   "MATT",
+   "BOSS_DMG",
+   "DMG",
+   "ALL_STAT_P"
+  ],
+  "armor": [
+   "STR",
+   "DEX",
+   "INT",
+   "LUK",
+   "STR_DEX",
+   "STR_INT",
+   "STR_LUK",
+   "DEX_INT",
+   "DEX_LUK",
+   "INT_LUK",
+   "HP",
+   "MP",
+   "REQ_LV",
+   "DEF",
+   "ATT",
+   "MATT",
+   "SPEED",
+   "JUMP",
+   "ALL_STAT_P"
+  ]
+ },
+ "levelRestrictions": {
+  "weapon": {
+   "BOSS_DMG": 90
+  },
+  "armor": {
+   "ATT": 60,
+   "MATT": 60,
+   "ALL_STAT_P": 70
+  }
+ },
+ "optionNames": {
+  "STR": {
+   "kms": "STR",
+   "jms": "STR"
+  },
+  "STR_DEX": {
+   "kms": "STR+DEX",
+   "jms": "STR+DEX"
+  },
+  "HP": {
+   "kms": "최대 HP",
+   "jms": "最大HP"
+  },
+  "MP": {
+   "kms": "최대 MP",
+   "jms": "最大MP"
+  },
+  "REQ_LV": {
+   "kms": "착용 레벨 감소",
+   "jms": "着用レベル減少"
+  },
+  "DEF": {
+   "kms": "방어력",
+   "jms": "防御力"
+  },
+  "ATT": {
+   "kms": "공격력",
+   "jms": "攻撃力"
+  },
+  "MATT": {
+   "kms": "마력",
+   "jms": "魔力"
+  },
+  "SPEED": {
+   "kms": "이동속도",
+   "jms": "移動速度"
+  },
+  "JUMP": {
+   "kms": "점프력",
+   "jms": "ジャンプ力"
+  },
+  "BOSS_DMG": {
+   "kms": "보스 몬스터 데미지%",
+   "jms": "ボスモンスター攻撃時ダメージ%"
+  },
+  "DMG": {
+   "kms": "데미지%",
+   "jms": "ダメージ%"
+  },
+  "ALL_STAT_P": {
+   "kms": "올스탯%",
+   "jms": "オールステータス%"
+  },
+  "_note": "JMS表記は未確定"
+ },
+ "formulas": {
+  "singleStat": "(floor(L'/20)+1)*s, L' = L>=250 ? 220 : L",
+  "doubleStat": "(floor(L/40)+1)*s (each stat)",
+  "hpMp": "floor(L/10)*10*3*s; Eternel(250) = 700*s; L200-249 unconfirmed (StrategyWiki: 600+20 per 10Lv)",
+  "def": "(floor(L/20)+1)*s (StrategyWiki/Xenogents)",
+  "attArmor": "s",
+  "speedJump": "s",
+  "allStatP": "s",
+  "bossDmgP": "2*s",
+  "dmgP": "s",
+  "reqLvReduce": "5*s",
+  "attWeaponBoss": "ceil(B*(floor(L/40)+1)*s*1.1^(s-3)/100) [exact rational]",
+  "attWeaponNonBoss": "ceil(B*(floor(L/40)+1)*s*1.1^(min(s,5)-1)/100) [GMS StrategyWiki; unconfirmed for KMS/JMS]",
+  "zeroWeapon": "non-boss formula on Lapis base; special % lines x2 effect",
+  "L": "original required level before REQ_LV reduction"
+ },
+ "weaponFormulaChecks": [
+  {
+   "item": "Genesis 1H sword",
+   "L": 200,
+   "B": 326,
+   "tiers3to7": [
+    59,
+    87,
+    119,
+    157,
+    201
+   ],
+   "source": "namu"
+  },
+  {
+   "item": "Genesis gun",
+   "L": 200,
+   "B": 249,
+   "tiers3to7": [
+    45,
+    66,
+    91,
+    120,
+    154
+   ],
+   "source": "kawaii-sushi"
+  },
+  {
+   "item": "Absolab gun",
+   "L": 160,
+   "B": 150,
+   "tiers3to7": [
+    23,
+    33,
+    46,
+    60,
+    77
+   ],
+   "source": "kawaii-sushi",
+   "note": "33 proves ceil, not floor+1"
+  },
+  {
+   "item": "Fafnir",
+   "L": 150,
+   "B": 86,
+   "tiers3to7": [
+    11,
+    16,
+    21,
+    28,
+    36
+   ],
+   "source": "namu/StrategyWiki"
+  }
+ ],
+ "bossItems": {
+  "examples": [
+   "(カオス)ルートアビス",
+   "アブソラブス",
+   "アーケインシェード",
+   "エテルネル",
+   "ボス装飾品",
+   "マイスター",
+   "ジェネシス武器",
+   "ネクロ",
+   "ロイヤルヴァンレオン",
+   "女帝"
+  ],
+  "nonBossExceptions": [
+   "(カオス)ホーンテイルネックレス",
+   "永生の石",
+   "カオスルートアビス帽子",
+   "ゼロ武器",
+   "スイングウォーター(JMS)",
+   "ヴェラッド(JMS)"
+  ]
+ },
+ "eligibility": {
+  "noFlame": [
+   "盾",
+   "補助武器(ブレイド含む)",
+   "肩飾り",
+   "指輪",
+   "勲章",
+   "エンブレム",
+   "バッジ",
+   "アンドロイド",
+   "機械心臓",
+   "称号",
+   "トーテム(GMS)"
+  ],
+  "exceptionsCanFlame": [
+   "スカーレットショルダー",
+   "シークレットリング(JMS公式記載)"
+  ],
+  "canFlame": [
+   "武器",
+   "帽子",
+   "上着/全身",
+   "下着",
+   "靴",
+   "手袋",
+   "マント",
+   "ベルト",
+   "ペンダント",
+   "顔飾り",
+   "目飾り",
+   "イヤリング",
+   "ポケット"
+  ]
+ },
+ "scoreWeightsDefault": {
+  "main": 1,
+  "sub": 0.125,
+  "att": 4,
+  "allStatP": 10,
+  "notes": "att 3-4, allStat% 8-12 (StrategyWiki old: 15). JMS転生スコア(nekonote2)=主+AS%*10+攻*4. 職別(DA HP, Xenon)未確定"
+ },
+ "referenceResults_bossArmor_main1_att4_as10": [
+  {
+   "L": 160,
+   "flame": "powerful",
+   "mean": 35.52,
+   "P>=100": 0.019172,
+   "P>=120": 0.003798,
+   "P>=140": 0.000358
+  },
+  {
+   "L": 160,
+   "flame": "eternal",
+   "mean": 39.84,
+   "P>=100": 0.036275,
+   "P>=120": 0.009257,
+   "P>=140": 0.001261
+  },
+  {
+   "L": 160,
+   "flame": "abyss",
+   "mean": 43.2,
+   "P>=100": 0.056449,
+   "P>=120": 0.017066,
+   "P>=140": 0.002794
+  },
+  {
+   "L": 200,
+   "flame": "powerful",
+   "mean": 40.19,
+   "P>=100": 0.038743,
+   "P>=120": 0.010926,
+   "P>=140": 0.002279
+  },
+  {
+   "L": 200,
+   "flame": "eternal",
+   "mean": 45.08,
+   "P>=100": 0.065943,
+   "P>=120": 0.022876,
+   "P>=140": 0.006229,
+   "P>=160": 0.001049
+  },
+  {
+   "L": 200,
+   "flame": "abyss",
+   "mean": 48.88,
+   "P>=100": 0.091002,
+   "P>=120": 0.036327,
+   "P>=140": 0.011854,
+   "P>=160": 0.002356
+  },
+  {
+   "L": 250,
+   "flame": "eternal",
+   "mean": 49.28,
+   "P>=100": 0.099585,
+   "P>=120": 0.039834,
+   "P>=140": 0.012823,
+   "P>=160": 0.003072
+  },
+  {
+   "L": 250,
+   "flame": "abyss",
+   "mean": 53.43,
+   "P>=100": 0.130989,
+   "P>=120": 0.059096,
+   "P>=140": 0.02237,
+   "P>=160": 0.006295
+  }
+ ],
+ "jmsAutoResetTargetMax": {
+  "powerful": {
+   "normal": 4,
+   "boss": 6
+  },
+  "eternal": {
+   "normal": 5,
+   "boss": 7
+  },
+  "black": {
+   "normal": 5,
+   "boss": 7
+  },
+  "abyss": {
+   "normal": 5,
+   "boss": 7
+  },
+  "mesoReset": null,
+  "source": "kawaii-sushi (2026-09-16)"
+ },
+ "unconfirmed": [
+  "JMS確率は非公開(KMS公式を採用)",
+  "JMSメル再設定の費用・確率",
+  "JMS黒い転生の炎の現行入手",
+  "타오르는 불꽃のJMS実装",
+  "HP/MP Lv200-249",
+  "非ボス武器攻撃力倍率",
+  "Lv250武器(デスティニー)の攻撃力係数",
+  "JMSで防御力行が存在するか(GMSは削除)",
+  "レベル制限除外時の候補母数",
+  "職別スコア係数",
+  "JMSオプション正式表記",
+  "非ボス装備に強力使用時の行数(JMS説明文は4個)"
+ ]
+}

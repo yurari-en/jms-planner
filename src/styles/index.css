@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 色トークンは "R G B" 形式(Tailwind の <alpha-value> で透過指定できるように) */
+:root {
+  color-scheme: light;
+  --color-bg: 255 255 255; /* #ffffff */
+  --color-surface: 244 244 248; /* #f4f4f8 */
+  --color-surface2: 233 233 241; /* #e9e9f1 */
+  --color-border: 214 214 226; /* #d6d6e2 */
+  --color-text: 26 26 46; /* #1a1a2e */
+  --color-muted: 98 98 122; /* #62627a */
+  --color-accent: 139 124 246; /* #8b7cf6 */
+  --color-eff-green: 52 211 153; /* #34d399 */
+  --color-eff-purple: 167 139 250; /* #a78bfa */
+  --color-eff-yellow: 251 191 36; /* #fbbf24 */
+  --color-eff-red: 248 113 113; /* #f87171 */
+}
+
+.dark {
+  color-scheme: dark;
+  --color-bg: 15 16 32; /* #0f1020 */
+  --color-surface: 26 27 46; /* #1a1b2e */
+  --color-surface2: 36 37 60; /* #24253c */
+  --color-border: 50 52 80; /* #323450 */
+  --color-text: 230 230 240; /* #e6e6f0 */
+  --color-muted: 154 155 180; /* #9a9bb4 */
+}
+
+body {
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-text));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

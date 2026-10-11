@@ -1,0 +1,62 @@
+{
+ "character": {
+  "displayedCP": 80000000,
+  "level": 270,
+  "STR": {
+   "final": 52000,
+   "pct": 330,
+   "nonPct": 21000
+  },
+  "DEX": {
+   "final": 6200,
+   "pct": 60,
+   "nonPct": 1500
+  },
+  "attack": {
+   "final": 7800,
+   "pct": 95
+  },
+  "dmgPct": 80,
+  "bossPct": 350,
+  "critDmgPct": 110
+ },
+ "cases": {
+  "zero": 0.0,
+  "mainPct+12": 1292423.9463227093,
+  "allStatPct+9": 1068057.455540374,
+  "mainFlat+100": 642390.2894491106,
+  "att+30": 600000.0,
+  "attPct+12": 4923076.923076943,
+  "boss+40": 6037735.8490566015,
+  "critDmg+8": 2612244.8979591727,
+  "perLv(9,+2)": 89635.85434173048
+ },
+ "deltas": {
+  "zero": {},
+  "mainPct+12": {
+   "pct_STR": 12
+  },
+  "allStatPct+9": {
+   "pct_STR": 9,
+   "pct_DEX": 9
+  },
+  "mainFlat+100": {
+   "flat_STR": 100
+  },
+  "att+30": {
+   "attFlat": 30
+  },
+  "attPct+12": {
+   "attPct": 12
+  },
+  "boss+40": {
+   "bossPct": 40
+  },
+  "critDmg+8": {
+   "critDmgPct": 8
+  },
+  "perLv(9,+2)": {
+   "nonPct_STR": 60
+  }
+ }
+}

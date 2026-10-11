@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "asOf": "2026-10-12",
+    "note": "JMSのキューブ確率は非公開。各JMSキューブを、機能が同じKMSキューブの公開確率(行別確率・等級上昇確率・等級上昇保証回数)に対応付ける。対応付けは推定(confidence参照)。価格はユーザー設定で上書きする前提の初期値。",
+    "sources": [
+      "https://maplestory.nexon.co.jp/notice/view/?alias=46d43ed748074e9abeea73ff9450960b&id=update (JMS ver4.24 2024-05-22: メガキューブ/ネオアディショナルキューブ実装、ブラックキューブ・マスターアディショナルミラクルキューブ販売終了、ネオミラクルキューブ→ネオキューブ改名)",
+      "https://maplestory.nexon.co.jp/notice/view/?alias=ece3d3088df543338935e56e711df79b (JMS 2025-01-01 お正月パック: メガキューブ20個+交換券21個=6,400NP、ネオキューブ20個+交換券10個=3,000NP)",
+      "https://maplestory.nexon.co.jp/notice/view/?alias=6145eb8cc72b4e3299e192ed8252bc8d (JMS 2025-08 メガアディショナルキューブ 1個540NP/11個5,400NP)",
+      "https://maplestory.nexon.co.jp/notice/view/?alias=2cf7af123da04c7ab49fcf148e1d9ec9 (JMS ミラクルタイム: 対象 ネオキューブ/メガキューブ/ネオアディショナルキューブ、等級上昇率2倍)",
+      "https://maplestory.nexon.com/Guide/OtherProbability/cube/red (KMS レッドキューブ: 等級上昇 6/1.8/0.3%、保証 25/83/500回)",
+      "https://maplestory.nexon.com/Guide/OtherProbability/cube/black (KMS 잠재능력 재설정/블랙큐브: 15/3.5/1.4%、保証 10/42/107回)",
+      "https://maplestory.nexon.com/Guide/OtherProbability/cube/addi (KMS 에디셔널/화이트에디셔널: 4.7619/1.9608/0.7%、保証 31/76/214回)",
+      "https://gamesignal.jp/archives/tools/maple-cube-simulator (JP攻略シミュレーター 2026-05-22: メガ/ネオミラクル 1回136円、アディショナル 1回355円 想定)"
+    ]
+  },
+  "currency": {
+    "note": "キューブはNEXONポイント(≒円)で購入。メル換算 = 価格(NP) × melPerNP。既定 1億メル=100NP(JP攻略 2026-07 の相場目安)→ melPerNP=1,000,000",
+    "melPerNPDefault": 1000000
+  },
+  "cubes": [
+    {
+      "id": "neo",
+      "nameJa": "ネオキューブ",
+      "target": "potential",
+      "itemIdIcon": 5062018,
+      "kmsEquivalent": "red",
+      "confidence": "C(推定): JMS旧ネオミラクルキューブ。KMSレッドキューブ相当の確率と仮定",
+      "maxGrade": "legendary",
+      "tierUp": { "rare": 0.060000002444, "epic": 0.018, "unique": 0.003 },
+      "guarantee": { "rare": 25, "epic": 83, "unique": 500 },
+      "guaranteeNote": "JMSに天井(等級上昇保証)があるかは未確認。既定はOFF",
+      "canKeepOld": false,
+      "defaultPriceNP": 100,
+      "priceNote": "お正月パック 3,000NP / (20+10個) ≒ 100NP"
+    },
+    {
+      "id": "mega",
+      "nameJa": "メガキューブ",
+      "target": "potential",
+      "itemIdIcon": 5062010,
+      "kmsEquivalent": "black",
+      "confidence": "B(推定): 『自動再設定し適用を選べる』= KMSブラックキューブ(잠재능력 재설정)と同機能",
+      "maxGrade": "legendary",
+      "tierUp": { "rare": 0.150000001275, "epic": 0.035, "unique": 0.014 },
+      "guarantee": { "rare": 10, "epic": 42, "unique": 107 },
+      "canKeepOld": true,
+      "defaultPriceNP": 156,
+      "priceNote": "お正月パック 6,400NP / (20+21個) ≒ 156NP。JP攻略シミュレーターは1回136円"
+    },
+    {
+      "id": "neoAdditional",
+      "nameJa": "ネオアディショナルキューブ",
+      "target": "additional",
+      "itemIdIcon": 5062500,
+      "kmsEquivalent": "additional",
+      "confidence": "B(推定): KMSエディショナルキューブ相当",
+      "maxGrade": "legendary",
+      "tierUp": { "rare": 0.047619, "epic": 0.019608, "unique": 0.007 },
+      "guarantee": { "rare": 31, "epic": 76, "unique": 214 },
+      "canKeepOld": false,
+      "defaultPriceNP": 355,
+      "priceNote": "単価の公式告知は未発見。JP攻略シミュレーターの想定(1回355円)を初期値に"
+    },
+    {
+      "id": "megaAdditional",
+      "nameJa": "メガアディショナルキューブ(期間限定)",
+      "target": "additional",
+      "itemIdIcon": 5062503,
+      "kmsEquivalent": "additional",
+      "confidence": "B(推定): KMSホワイトエディショナル相当(適用選択可)",
+      "maxGrade": "legendary",
+      "tierUp": { "rare": 0.047619, "epic": 0.019608, "unique": 0.007 },
+      "guarantee": { "rare": 31, "epic": 76, "unique": 214 },
+      "canKeepOld": true,
+      "defaultPriceNP": 491,
+      "priceNote": "2025-08 販売: 11個 5,400NP ≒ 491NP/個。既定は無効(期間限定)",
+      "defaultEnabled": false
+    }
+  ],
+  "events": {
+    "miracleTime": { "label": "ミラクルタイム(等級上昇率2倍)", "tierUpMultiplier": 2, "appliesTo": ["neo", "mega", "neoAdditional"] }
+  },
+  "gradeOrder": ["rare", "epic", "unique", "legendary"]
+}

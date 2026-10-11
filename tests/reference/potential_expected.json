@@ -1,0 +1,147 @@
+[
+ {
+  "desc": "武器Lv200 レジェ 攻撃力%(9%以上)1行以上",
+  "cube": "black",
+  "grade": "legendary",
+  "part": "weapon",
+  "lv": 200,
+  "need": {
+   "att": 1
+  },
+  "prob": 0.17223057282845636,
+  "expectedTries": 5.806170086863797
+ },
+ {
+  "desc": "武器Lv200 レジェ 攻撃力%(9%以上)2行以上",
+  "cube": "black",
+  "grade": "legendary",
+  "part": "weapon",
+  "lv": 200,
+  "need": {
+   "att": 2
+  },
+  "prob": 0.010616791575206522,
+  "expectedTries": 94.19041458205773
+ },
+ {
+  "desc": "武器Lv200 レジェ 攻撃力%(9%以上)3行",
+  "cube": "black",
+  "grade": "legendary",
+  "part": "weapon",
+  "lv": 200,
+  "need": {
+   "att": 3
+  },
+  "prob": 0.0002197948391028,
+  "expectedTries": 4549.697363605025
+ },
+ {
+  "desc": "武器Lv200 レジェ 攻%2行+ボス30%以上1行",
+  "cube": "black",
+  "grade": "legendary",
+  "part": "weapon",
+  "lv": 200,
+  "need": {
+   "att": 2,
+   "boss": 1
+  },
+  "prob": 0.0011799864803405402,
+  "expectedTries": 847.4673368388113
+ },
+ {
+  "desc": "帽子Lv160 レジェ STR%(9%以上)3行",
+  "cube": "black",
+  "grade": "legendary",
+  "part": "hat",
+  "lv": 160,
+  "need": {
+   "main": 3
+  },
+  "prob": 0.00090530378144784,
+  "expectedTries": 1104.601593954146
+ },
+ {
+  "desc": "帽子Lv160 レジェ STR%(9%以上)2行",
+  "cube": "black",
+  "grade": "legendary",
+  "part": "hat",
+  "lv": 160,
+  "need": {
+   "main": 2
+  },
+  "prob": 0.026441242112929957,
+  "expectedTries": 37.81970588707679
+ },
+ {
+  "desc": "帽子Lv160 レジェ クール-2秒 1行",
+  "cube": "black",
+  "grade": "legendary",
+  "part": "hat",
+  "lv": 160,
+  "need": {
+   "cdr": 1
+  },
+  "prob": 0.06045416803556429,
+  "expectedTries": 16.541456652115613
+ },
+ {
+  "desc": "手袋Lv160 レジェ クリダメ8% 2行",
+  "cube": "black",
+  "grade": "legendary",
+  "part": "gloves",
+  "lv": 160,
+  "need": {
+   "cd": 2
+  },
+  "prob": 0.002583984291947608,
+  "expectedTries": 386.99925658072675
+ },
+ {
+  "desc": "上着Lv160 アディ レジェ 攻撃力+12以上 1行",
+  "cube": "additional",
+  "grade": "legendary",
+  "part": "top",
+  "lv": 160,
+  "need": {
+   "att": 1
+  },
+  "prob": 0.11219688864539124,
+  "expectedTries": 8.912903130144665
+ },
+ {
+  "desc": "上着Lv160 アディ レジェ 攻撃力+12以上 2行",
+  "cube": "additional",
+  "grade": "legendary",
+  "part": "top",
+  "lv": 160,
+  "need": {
+   "att": 2
+  },
+  "prob": 0.0044092504130258505,
+  "expectedTries": 226.79591910810743
+ },
+ {
+  "desc": "武器Lv200 アディ レジェ 攻%(9%以上)1行",
+  "cube": "additional",
+  "grade": "legendary",
+  "part": "weapon",
+  "lv": 200,
+  "need": {
+   "att": 1
+  },
+  "prob": 0.13752386522929544,
+  "expectedTries": 7.271465198659783
+ },
+ {
+  "desc": "武器Lv200 アディ ユニーク 攻%(6%以上)1行",
+  "cube": "additional",
+  "grade": "unique",
+  "part": "weapon",
+  "lv": 200,
+  "need": {
+   "att": 1
+  },
+  "prob": 0.15495383007212482,
+  "expectedTries": 6.453535221004476
+ }
+]

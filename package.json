@@ -1,0 +1,53 @@
+{
+  "name": "jms-planner",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "node scripts/build-manifest.mjs",
+    "build": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "data:items": "node scripts/fetch-jms-items.mjs --version 444",
+    "data:icons": "node scripts/fetch-icons.mjs --version 444",
+    "data:cubes": "node scripts/fetch-kms-cube-tables.mjs"
+  },
+  "dependencies": {
+    "comlink": "4.4.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "zod": "3.23.8",
+    "zustand": "4.5.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.5",
+    "@types/node": "20.19.43",
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "4.7.0",
+    "autoprefixer": "10.6.1",
+    "eslint": "9.39.5",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-react-refresh": "0.5.7",
+    "globals": "17.13.0",
+    "postcss": "8.5.29",
+    "prettier": "3.9.10",
+    "tailwindcss": "3.4.19",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.71.1",
+    "vite": "6.4.4",
+    "vitest": "2.1.9"
+  },
+  "overrides": {
+    "vitest": {
+      "vite": "$vite"
+    }
+  }
+}
