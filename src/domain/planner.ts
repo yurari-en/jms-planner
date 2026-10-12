@@ -49,7 +49,7 @@ import type {
   SfStep,
 } from './planTypes';
 import { evaluateCandidates, type PotCandidate, type UsefulCategory } from './potential';
-import type { CubeSetting, PlannerSettings } from './settings';
+import { melPerNP as melPerNPOf, type CubeSetting, type PlannerSettings } from './settings';
 import { sfCandidates, sfContribToDelta, sfOptionsFrom } from './starforce';
 
 // ================================================================ コンテキスト
@@ -345,7 +345,7 @@ function potCandidates(w: Work, kind: 'potential' | 'additional', env: Env): Pot
     lv,
     target: kind,
     cubes,
-    melPerNP: settings.melPerNP,
+    melPerNP: melPerNPOf(settings),
     gradeOrder: data.cubes.gradeOrder,
     gradeUp: {
       miracleTime: settings.miracleTime,

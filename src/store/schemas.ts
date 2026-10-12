@@ -141,7 +141,7 @@ const plannerSettingsObject = z.object({
     neoAdditional: cubeSettingSchema,
     megaAdditional: cubeSettingSchema,
   }),
-  melPerNP: nonNeg,
+  pointsPer100MMel: z.number().finite().positive(),
   miracleTime: z.boolean(),
   useGuarantee: z.boolean(),
   cdrLinesPer2Sec: z.union([
@@ -316,7 +316,27 @@ function overlay(defaults: unknown, raw: unknown): unknown {
  * 保存されていた(一部だけの/古い)設定を defaults に重ねる。
  * 未知のキーは捨て、不正な値はその項目だけ既定値に戻す。
  */
+/** 旧設定 melPerNP の既定値(cubes.json の旧 melPerNPDefault)。この値なら未変更とみなす */
+const LEGACY_MEL_PER_NP_DEFAULT = 1_000_000;
+
 export function migrateSettings(raw: unknown, defaults: PlannerSettings): PlannerSettings {
+  // 旧キー melPerNP(1NPあたりのメル)を pointsPer100MMel(1億メルあたりのポイント数)へ換算する。
+  // 保存形式の version は 1 のまま。新キーがあればそちらを優先し、呼び出し元のオブジェクトは変更しない。
+  // 旧既定値(1,000,000 = 1億メル 100NP)のままなら「未変更」とみなし、新しい既定値を使う
+  if (isRecord(raw) && !('pointsPer100MMel' in raw)) {
+    const old = raw.melPerNP;
+    const copy: Record<string, unknown> = { ...raw };
+    delete copy.melPerNP;
+    if (
+      typeof old === 'number' &&
+      Number.isFinite(old) &&
+      old > 0 &&
+      old !== LEGACY_MEL_PER_NP_DEFAULT
+    ) {
+      copy.pointsPer100MMel = Math.round((1e8 / old) * 1000) / 1000;
+    }
+    raw = copy;
+  }
   const merged = overlay(defaults, raw) as Record<string, unknown>;
   merged.version = 1;
   for (let guard = 0; guard < 64; guard++) {

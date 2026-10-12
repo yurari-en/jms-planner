@@ -32,8 +32,8 @@ export interface PlannerSettings {
   /** 順序計算で考える★の上限 */
   sfMaxTarget: number;
   cubes: Record<CubeId, CubeSetting>;
-  /** 1NP あたりのメル(1億メル = 100NP → 1,000,000) */
-  melPerNP: number;
+  /** メルマーケットの相場: 1億メルあたりのメイプルポイント数(1ポイント = 1NP とみなす)。1NPあたりのメル = 1億 ÷ この値 */
+  pointsPer100MMel: number;
   /** 等級上昇率2倍 */
   miracleTime: boolean;
   /** 等級上昇保証(天井)を期待値に入れる(JMS で有無未確認のため既定 OFF) */
@@ -48,6 +48,17 @@ export interface PlannerSettings {
   flameBase: FlameBase;
   /** スペックアップの順番に出すステップ数の上限 */
   stepLimit: number;
+}
+
+/** メルマーケットの取引単位(1億メル) */
+export const MEL_PER_MARKET_UNIT = 100_000_000;
+
+/** 1NPあたりのメル(= 1億 ÷ メルマーケットの 1億メルあたりのポイント数) */
+export function melPerNP(s: Pick<PlannerSettings, 'pointsPer100MMel'>): number {
+  const p = s.pointsPer100MMel;
+  // 不正値のときキューブを無料にしないための保険。スキーマと入力欄で正の数に限っているので通常は到達しない
+  if (typeof p !== 'number' || !Number.isFinite(p) || p <= 0) return Number.POSITIVE_INFINITY;
+  return MEL_PER_MARKET_UNIT / p;
 }
 
 export function defaultSettings(cubes: CubesMaster): PlannerSettings {
@@ -72,7 +83,7 @@ export function defaultSettings(cubes: CubesMaster): PlannerSettings {
     safeguardStars: [],
     sfMaxTarget: 22,
     cubes: cubeSettings,
-    melPerNP: cubes.currency.melPerNPDefault,
+    pointsPer100MMel: cubes.currency.pointsPer100MMelDefault,
     miracleTime: false,
     useGuarantee: false,
     cdrLinesPer2Sec: 'auto',

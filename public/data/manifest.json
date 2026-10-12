@@ -1,10 +1,10 @@
 {
- "version": "bf02be9ab4",
- "generatedAt": "2026-10-12T02:46:13.225Z",
+ "version": "c0c897fa62",
+ "generatedAt": "2026-10-12T07:02:43.624Z",
  "files": {
   "cubes.json": {
-   "sha": "40340a11",
-   "bytes": 5065,
+   "sha": "ae9d4af6",
+   "bytes": 5219,
    "asOf": "2026-10-12"
   },
   "flame.json": {

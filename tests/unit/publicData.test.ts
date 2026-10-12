@@ -93,6 +93,13 @@ describe('public/data の実ファイル', () => {
     }
   });
 
+  it('cubes.json: メル換算の既定はメルマーケット 1億メル = 130 ポイント', () => {
+    const r = cubesSchema.safeParse(read('cubes.json'));
+    expect(r.success).toBe(true);
+    if (!r.success) return;
+    expect(r.data.currency.pointsPer100MMelDefault).toBe(130);
+  });
+
   it('cubes.json の itemIdIcon に対応するアイコンが public/icons/items にある', () => {
     const r = cubesSchema.safeParse(read('cubes.json'));
     expect(r.success).toBe(true);

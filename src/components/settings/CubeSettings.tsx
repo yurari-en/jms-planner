@@ -1,4 +1,5 @@
 import type { CubeId } from '../../data/types';
+import { melPerNP } from '../../domain/settings';
 import { useSettingsStore } from '../../store/settings';
 import Collapsible from '../common/Collapsible';
 import ItemIcon from '../common/ItemIcon';
@@ -38,7 +39,7 @@ export default function CubeSettings({ s, d, data }: SectionProps) {
                 <span className="block">対応: {c.confidence}</span>
                 {c.priceNote && <span className="block">価格: {c.priceNote}</span>}
                 <span className="block">
-                  1個 ≒ {fmtNum(cur.priceNP * s.melPerNP)} メル(換算レートで計算)
+                  1個 ≒ {fmtNum(Math.round(cur.priceNP * melPerNP(s)))} メル(換算レートで計算)
                 </span>
               </>
             }

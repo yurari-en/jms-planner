@@ -176,7 +176,7 @@ export interface CubeDef {
 
 export interface CubesMaster {
   meta: { asOf: string; note: string; sources: string[] };
-  currency: { note?: string; melPerNPDefault: number };
+  currency: { note?: string; pointsPer100MMelDefault: number };
   cubes: CubeDef[];
   events: {
     miracleTime: { label: string; tierUpMultiplier: number; appliesTo: CubeId[] };

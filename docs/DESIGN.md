@@ -26,7 +26,7 @@
 ### 0.4 方針
 - **確率・費用など JMS で公開されていない値は KMS 公式値を使う**。各値の出典と確度はデータファイルの `meta` / `confidence` に持つ。
 - 不確かな値は**設定で上書きできる**ようにし、画面の「計算方法」に前提を明記する。
-- 通貨は**メル**(JMSの通貨名)。キューブ等の課金アイテムは NEXONポイント(NP)単価 × メル換算レートでメルに直す。
+- 通貨は**メル**(JMSの通貨名)。キューブ等の課金アイテムは NEXONポイント(NP)単価 × メル換算レートでメルに直す。換算レートはメルマーケットの相場(1億メルあたりのメイプルポイント数)から 1NPあたりのメル = 1億 ÷ ポイント数 として求める(1メイプルポイント = 1NP とみなす)。
 - 画面は日本語のみ。
 
 ---
@@ -307,7 +307,7 @@ export interface FlameState { str: number; dex: number; int: number; luk: number
 | `safeguardStars` | `[]` | 破壊防止する段階(15/16/17) |
 | `sfMaxTarget` | `22` | 順序計算で考える★の上限(装備の最大★とユーザー目標★の小さい方で打ち切り) |
 | `cubes` | `{ neo:{enabled:true, priceNP:100}, mega:{enabled:true, priceNP:156}, neoAdditional:{enabled:true, priceNP:355}, megaAdditional:{enabled:false, priceNP:491} }` | |
-| `melPerNP` | `1_000_000` | 1NP あたりのメル(1億メル=100NP) |
+| `pointsPer100MMel` | `130` | メルマーケットの相場: 1億メルあたりのメイプルポイント。1NPあたりのメル = 1億 ÷ この値(保存済みの旧キー melPerNP は読み込み時に換算。旧既定値 1,000,000 のままなら未変更とみなし新既定値) |
 | `miracleTime` | `false` | 等級上昇率2倍 |
 | `useGuarantee` | `false` | 等級上昇保証(天井)を期待値に入れる(JMSで有無未確認のため既定OFF) |
 | `cdrLinesPer2Sec` | `'auto'` | 帽子クール減2秒 = レジェ主ステ何行分。`'auto'`=職業既定(`jobs.json cdrLinesPer2Sec`)、または 0/0.5/1/1.5/2/2.5 |
@@ -461,7 +461,7 @@ cubesToGrade(g0 → g) = Σ_{h=g0}^{g の1つ下} E_h,  E_h = 1/q_h           (q
                                     useGuarantee 時: E_h = (1 − (1−q_h)^N_h) / q_h   (N_h = guarantee[h])
 cubesForTarget = 1 / P(T | g)                              // §6.3.2
 expectedCubes  = cubesToGrade + cubesForTarget
-cost(cube)     = expectedCubes × priceNP(cube) × melPerNP
+cost(cube)     = expectedCubes × priceNP(cube) × melPerNP,  melPerNP = 1億 ÷ pointsPer100MMel
 ```
 - 有効なキューブのうち `cost` が最小のものを採用し、ステップに記録(表示: 「メガキューブで平均 N 個」)。
 - 等級を上げている途中の結果は使わない(等級が上がった時点から目標を狙い直す)近似。
@@ -618,7 +618,7 @@ loop (plan.length < stepLimit):
 | 武器★の一部段階 | 計算しない | データ追記 |
 | 非ボス武器の炎攻撃力 | GMS系の式 | `flame.json` |
 | 黒い転生の炎の入手可否 | 選択肢に残す | 設定 |
-| メル換算レート | 1億メル=100NP | 設定 |
+| メル換算レート | メルマーケット 1億メル=130ポイント(1ポイント=1NP は未確認) | 設定 |
 
 ## 12. 出典
 - スターフォース: `public/data/starforce.json meta.sources`、`docs/research/10_starforce_research.json`

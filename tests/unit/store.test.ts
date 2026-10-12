@@ -225,7 +225,7 @@ describe('migrateSettings', () => {
         vipRank: 'platinum',
         cdrLinesPer2Sec: 3,
         stepLimit: 'many',
-        melPerNP: -5,
+        pointsPer100MMel: -5,
         safeguardStars: [15, 'x'],
         include: { starforce: 'yes', potential: false },
         sfMaxTarget: 25,
@@ -235,7 +235,7 @@ describe('migrateSettings', () => {
     expect(s.vipRank).toBe(defaults.vipRank);
     expect(s.cdrLinesPer2Sec).toBe('auto');
     expect(s.stepLimit).toBe(defaults.stepLimit);
-    expect(s.melPerNP).toBe(defaults.melPerNP);
+    expect(s.pointsPer100MMel).toBe(defaults.pointsPer100MMel);
     expect(s.safeguardStars).toEqual(defaults.safeguardStars);
     expect(s.include).toEqual({ starforce: true, potential: false, additional: true });
     expect(s.sfMaxTarget).toBe(25);
@@ -243,6 +243,27 @@ describe('migrateSettings', () => {
 
   it('オブジェクトでなければ既定値', () => {
     expect(migrateSettings('garbage', defaults)).toEqual(defaults);
+  });
+
+  it('旧キー melPerNP は pointsPer100MMel に換算して引き継ぐ(旧既定値なら新既定値)', () => {
+    const raw = { version: 1, melPerNP: 2_000_000 };
+    const s = migrateSettings(raw, defaults);
+    expect(s.pointsPer100MMel).toBe(50);
+    expect('melPerNP' in s).toBe(false);
+    expect(raw).toEqual({ version: 1, melPerNP: 2_000_000 });
+
+    // 旧既定値 1,000,000(1億メル=100NP)のままなら未変更とみなして新しい既定値(130)
+    expect(migrateSettings({ version: 1, melPerNP: 1_000_000 }, defaults).pointsPer100MMel).toBe(
+      defaults.pointsPer100MMel,
+    );
+    expect(defaults.pointsPer100MMel).toBe(130);
+    expect(migrateSettings({ version: 1, melPerNP: 0 }, defaults).pointsPer100MMel).toBe(
+      defaults.pointsPer100MMel,
+    );
+    expect(
+      migrateSettings({ version: 1, pointsPer100MMel: 125, melPerNP: 1_000_000 }, defaults)
+        .pointsPer100MMel,
+    ).toBe(125);
   });
 });
 
@@ -400,6 +421,7 @@ describe('settings store', () => {
   it('initDefaults: 未保存なら既定値、保存済みなら重ねる', () => {
     useSettingsStore.getState().initDefaults(cubes);
     expect(useSettingsStore.getState().settings).toEqual(defaultSettings(cubes));
+    expect(useSettingsStore.getState().settings?.pointsPer100MMel).toBe(130);
 
     settingsDebouncedStorage.flush();
     mem.setItem(SETTINGS_KEY, JSON.stringify({ version: 1, stepLimit: 50, bogus: true }));

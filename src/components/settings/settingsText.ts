@@ -24,7 +24,11 @@ export const UNRESOLVED_ITEMS: { item: string; handling: string; change: string 
   { item: '武器★の一部段階', handling: '計算しない', change: 'データ追記' },
   { item: '非ボス武器の炎攻撃力', handling: 'GMS系の式', change: 'データ(flame.json)' },
   { item: '黒い転生の炎の入手可否', handling: '選択肢に残す', change: '設定「基準の炎」' },
-  { item: 'メル換算レート', handling: '1億メル=100NP', change: '設定「1NPあたりのメル」' },
+  {
+    item: 'メル換算レート',
+    handling: 'メルマーケットの相場 1億メル = 130 ポイント(1ポイント = 1NP とみなす、未確認)',
+    change: '設定「メル換算レート」',
+  },
   {
     item: '★の可否(部位以外)',
     handling: '強化可能回数>0 かつ 装備固有の成長システムでない装備だけ★可(補助武器も同じ)',

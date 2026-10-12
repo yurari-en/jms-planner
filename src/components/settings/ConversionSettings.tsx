@@ -1,5 +1,5 @@
 import type { FlameBase } from '../../data/types';
-import type { CdrLinesSetting } from '../../domain/settings';
+import { melPerNP, type CdrLinesSetting } from '../../domain/settings';
 import { selectActiveCharacter, useCharactersStore } from '../../store/characters';
 import { useSettingsStore } from '../../store/settings';
 import Collapsible from '../common/Collapsible';
@@ -32,24 +32,34 @@ export default function ConversionSettings({ s, d, data }: SectionProps) {
   const jobId = useCharactersStore((st) => selectActiveCharacter(st)?.jobId);
   const job = jobId ? data.jobs.jobs.find((j) => j.id === jobId) : undefined;
   const jobDefault = job ? job.cdrLinesPer2Sec : null;
+  const perNP = melPerNP(s);
   const flameName = (k: FlameBase) => data.flame.flames[k]?.jms ?? FLAME_FALLBACK[k];
 
   return (
     <Collapsible id="settings.conversion" title="換算">
       <SettingRow
-        name="1NPあたりのメル"
-        description="1億メル = 100NP なら 1,000,000"
-        isDefault={s.melPerNP === d.melPerNP}
-        defaultText={fmtNum(d.melPerNP)}
-        onReset={() => resetKey('melPerNP')}
+        name="メル換算レート"
+        description={
+          <>
+            1ポイント = {Number.isFinite(perNP) ? fmtNum(Math.round(perNP)) : '—'}{' '}
+            メル(1メイプルポイント = 1NP とみなして、キューブ価格のメル換算に使います)
+            <span className="block">
+              メルマーケットは1億メル単位・メイプルポイント建て。売り手の手数料1%は無視。1ポイント =
+              1NP は未確認
+            </span>
+          </>
+        }
+        isDefault={s.pointsPer100MMel === d.pointsPer100MMel}
+        defaultText={`${fmtNum(d.pointsPer100MMel)} ポイント`}
+        onReset={() => resetKey('pointsPer100MMel')}
       >
         <NumberField
-          label="1NPあたりのメル"
-          value={s.melPerNP}
-          min={0}
-          integer
-          suffix="メル"
-          onChange={(v) => update({ melPerNP: v })}
+          label="メルマーケットの相場: 1億メル ="
+          value={s.pointsPer100MMel}
+          min={1}
+          step={1}
+          suffix="ポイント"
+          onChange={(v) => update({ pointsPer100MMel: v })}
         />
       </SettingRow>
 

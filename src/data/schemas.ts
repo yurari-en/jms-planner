@@ -96,7 +96,7 @@ const cubeDefSchema = z
 export const cubesSchema = z
   .object({
     meta: looseMeta,
-    currency: z.object({ melPerNPDefault: num }).passthrough(),
+    currency: z.object({ pointsPer100MMelDefault: num.positive() }).passthrough(),
     cubes: z.array(cubeDefSchema).min(1),
     events: z
       .object({

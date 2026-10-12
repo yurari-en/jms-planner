@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { CubeTableKind, MasterData, VipRank } from '../../data/types';
-import type { PlannerSettings } from '../../domain/settings';
+import { melPerNP, type PlannerSettings } from '../../domain/settings';
+import { fmtNum } from '../settings/settingsText';
 import { formatMel } from './format';
 
 export interface MethodNotesProps {
@@ -59,7 +60,8 @@ export default function MethodNotes({ data, settings, jobId }: MethodNotesProps)
         .map((k) => data.starforce.events[k].label ?? EVENT_FALLBACK[k])
     : [];
   const asOf = Object.entries(data.manifest.files);
-  const melPerNP = settings?.melPerNP ?? data.cubes.currency.melPerNPDefault;
+  const points = settings?.pointsPer100MMel ?? data.cubes.currency.pointsPer100MMelDefault;
+  const perNP = melPerNP({ pointsPer100MMel: points });
 
   return (
     <div className="min-w-0 space-y-3 break-words">
@@ -97,8 +99,9 @@ export default function MethodNotes({ data, settings, jobId }: MethodNotesProps)
           {settings?.useGuarantee && ' 等級上昇保証(天井)を反映中。'}
         </p>
         <p>
-          キューブの確率は JMS 非公開のため、KMS の確率表に対応付けています(1NP ={' '}
-          {formatMel(melPerNP)} で換算)。
+          キューブの確率は JMS 非公開のため、KMS の確率表に対応付けています(メルマーケットの相場
+          1億メル = {fmtNum(points)} ポイント、1NP = {formatMel(perNP)} で換算。1メイプルポイント =
+          1NP とみなす、未確認)。
         </p>
         <ul className="list-disc space-y-0.5 pl-4">
           {data.cubes.cubes.map((c) => (
@@ -111,7 +114,7 @@ export default function MethodNotes({ data, settings, jobId }: MethodNotesProps)
               {settings?.cubes[c.id] && (
                 <span>
                   {' '}
-                  / 1個 {formatMel(settings.cubes[c.id].priceNP * melPerNP)}
+                  / 1個 {formatMel(settings.cubes[c.id].priceNP * perNP)}
                   {settings.cubes[c.id].enabled ? '' : '(使わない設定)'}
                 </span>
               )}
