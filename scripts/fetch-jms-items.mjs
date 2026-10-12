@@ -52,6 +52,11 @@ function num(v) {
   return undefined;
 }
 
+// maplestory.io の名称に末尾の改行・空白が混じるので、空白類を1つの空白にまとめて前後を削る
+function normName(s) {
+  return String(s).replace(/[\r\n\t ]+/g, ' ').trim();
+}
+
 async function getJson(url, tries = 4) {
   for (let i = 0; i < tries; i++) {
     try {
@@ -102,14 +107,14 @@ async function main() {
   const setNames = {};
   await pool(setIds, CONCURRENCY, async (sid) => {
     const v = await getJson(`${API}/wz/JMS/${VER}/Etc/SetItemInfo.img/${sid}/setItemName`);
-    if (v?.value) setNames[sid] = v.value;
+    if (v?.value) setNames[sid] = normName(v.value);
   });
 
   const out = items.map((it) => {
     const m = meta[it.id] ?? {};
     return {
       id: it.id,
-      name: it.name,
+      name: normName(it.name),
       lv: m.reqLevel ?? it.requiredLevel,
       slot: slotOf(it),
       sub: it.typeInfo.subCategory,

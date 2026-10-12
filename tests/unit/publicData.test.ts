@@ -45,6 +45,10 @@ describe('public/data の実ファイル', () => {
     expect(items.length).toBeGreaterThan(1000);
     // 戦士の補助武器「メダル」が含まれている(勲章の除外に巻き込まれていない)
     expect(items.some((i) => i.slot === 'secondary' && i.sub === 'Medal')).toBe(true);
+    // 名称に前後の空白や改行が混じっていない(maplestory.io の生データ対策)
+    expect(
+      items.filter((i) => i.name !== i.name.trim() || /[\r\n]/.test(i.name)).map((i) => i.id),
+    ).toEqual([]);
   });
 
   it('cubes.json の itemIdIcon に対応するアイコンが public/icons/items にある', () => {
