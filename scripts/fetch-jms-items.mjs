@@ -75,6 +75,8 @@ const JMS_SUB_100 = { 1354300: '霊符', 1353800: '飾り房' };
 const JMS_SUB_10 = { 1354000: 'ブレスレット', 1354010: 'ウェポンベルト', 1354020: '四玉飾り', 1354030: 'ヘックスシーカー', 1354040: '如意宝珠' };
 // 武器(1000 単位): 1254xxx はカンナの武器「扇」(陰陽の扇など)
 const JMS_SUB_1000 = { 1254000: '扇' };
+// 強化可能回数 0 でも潜在が付く装備(ゲーム内で確認済みの例外。equip.ts の潜在可否判定で使う)
+const JMS_POTENTIAL_OK = { 1114324: 'エターナルフレイムリング(ユーザー確認 2026-10-12)' };
 
 // reqJob のビットマスク → 一覧 API の requiredJobs と同じ形式(0/なし = Beginner = 全職)
 const JOB_BITS = [[1, 'Warrior'], [2, 'Magician'], [4, 'Bowman'], [8, 'Thief'], [16, 'Pirate']];
@@ -272,6 +274,7 @@ async function main() {
       exGrade: m.exGrade ? 1 : 0,
       exceptUpgrade: m.exceptUpgrade ? 1 : 0,
       noPotential: m.noPotential ? 1 : 0,
+      ...(JMS_POTENTIAL_OK[it.id] ? { potentialOk: 1 } : {}),
       base: {
         str: m.incSTR ?? 0, dex: m.incDEX ?? 0, int: m.incINT ?? 0, luk: m.incLUK ?? 0,
         att: m.incPAD ?? 0, matt: m.incMAD ?? 0, hp: m.incMHP ?? 0,
@@ -299,6 +302,7 @@ async function main() {
       exGrade: m.exGrade ? 1 : 0,
       exceptUpgrade: m.exceptUpgrade ? 1 : 0,
       noPotential: m.noPotential ? 1 : 0,
+      ...(JMS_POTENTIAL_OK[e.id] ? { potentialOk: 1 } : {}),
       base: {
         str: m.incSTR ?? 0, dex: m.incDEX ?? 0, int: m.incINT ?? 0, luk: m.incLUK ?? 0,
         att: m.incPAD ?? 0, matt: m.incMAD ?? 0, hp: m.incMHP ?? 0,

@@ -265,6 +265,7 @@ export const itemSchema = z
     exGrade: flag,
     exceptUpgrade: flag,
     noPotential: flag,
+    potentialOk: z.literal(1).optional(),
     base: z
       .object({ str: num, dex: num, int: num, luk: num, att: num, matt: num, hp: num })
       .passthrough(),

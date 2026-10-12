@@ -86,6 +86,12 @@ describe('public/data の実ファイル', () => {
     // 2026-10-12 時点で 299 件(イベント成長武器・アウェイクリング等)。大きく増えたら判定の見直しを疑う
     expect(exGradeCount).toBeLessThanOrEqual(350);
     expect(byId.get(1113098)).toMatchObject({ tuc: 0 });
+    expect(byId.get(1114324)).toMatchObject({
+      name: 'エターナルフレイムリング',
+      tuc: 0,
+      potentialOk: 1,
+    });
+    expect(byId.get(1113098)?.potentialOk).toBeUndefined();
     expect(items.filter((i) => i.onlyUpgrade === 1).length).toBeGreaterThan(0);
     for (const id of [1354309, 1191103, 1191101, 1722400]) {
       const icon = path.resolve(here, '../../public/icons/items', `${id}.png`);

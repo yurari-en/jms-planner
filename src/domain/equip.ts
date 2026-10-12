@@ -71,8 +71,9 @@ export function resolveEquip(eq: EquipInput, deps: EquipResolveDeps): EquipMeta 
   // ただし補助武器・エンブレム・盾(デーモンのフォースシールド等)は設計上 tuc 0 でも潜在可。wz に noPotential が無い装備
   // (シードリング等)の判定はこの規則による(ゲーム側の規則の推定、2026-10-12)。手入力の装備は部位の規則のまま。
   // 盾は補助武器の枠に装備するため通常 kind は 'secondary' になるが、念のため 'shield' も含める。
+  // 例外: items.json の potentialOk(エターナルフレイムリング等、ゲーム内で潜在が付くと確認済みの tuc 0 装備)は潜在可。
   const potKindAllowsTuc0 = kind === 'secondary' || kind === 'emblem' || kind === 'shield';
-  const masterAllowsPot = item ? item.tuc > 0 || potKindAllowsTuc0 : true;
+  const masterAllowsPot = item ? item.tuc > 0 || potKindAllowsTuc0 || item.potentialOk === 1 : true;
   const canPotential =
     rules.potential && masterAllowsPot && !(item?.noPotential === 1) && !eq.overrides?.potDisabled;
   const maxStar = eq.overrides?.maxStar ?? maxStarByLevel(deps.starforce, lv);

@@ -333,6 +333,8 @@ export interface ItemMaster {
   exGrade: 0 | 1;
   exceptUpgrade: 0 | 1;
   noPotential: 0 | 1;
+  /** 強化可能回数 0 でも潜在可の例外(エターナルフレイムリング等、items.json 生成時の一覧) */
+  potentialOk?: 1;
   base: { str: number; dex: number; int: number; luk: number; att: number; matt: number; hp: number };
 }
 

@@ -49,6 +49,11 @@ const NORMAL_RING = master(1113999, '普通の指輪', 'ring', 3, 0);
 const EMBLEM = master(1190999, 'エンブレム(tuc 0)', 'emblem', 0);
 const DEMON_SHIELD = master(1099999, 'デーモンのフォースシールド(tuc 0)', 'shield', 0);
 const NO_POT_RING = master(1113998, '潜在不可の指輪', 'ring', 3, 0, 0, 1);
+// エターナルフレイムリング: tuc 0 だがゲーム内で潜在が付くと確認済み(items.json の potentialOk)
+const FLAME_RING: ItemMaster = {
+  ...master(1114324, 'エターナルフレイムリング', 'ring', 0),
+  potentialOk: 1,
+};
 
 const deps: EquipResolveDeps = {
   itemsById: new Map(
@@ -56,6 +61,7 @@ const deps: EquipResolveDeps = {
       FUDA,
       CLASSIC,
       SEED_RING,
+      FLAME_RING,
       AWAKE_RING,
       NORMAL_RING,
       DESTINY,
@@ -145,6 +151,10 @@ describe('resolveEquip: マスタによる潜在可否', () => {
   // 盾は画面上は補助武器の枠に装備する(EquipSlot に 'shield' は無い)
   it('強化可能回数 0 の盾(デーモンのフォースシールド等)は補助武器の枠で潜在可', () => {
     expect(pot(equip(DEMON_SHIELD.id))).toBe(true);
+  });
+
+  it('強化可能回数 0 でも potentialOk の指輪(エターナルフレイムリング)は潜在可', () => {
+    expect(pot(equip(FLAME_RING.id, {}, 'ring1'))).toBe(true);
   });
 
   it('noPotential の装備は強化可能回数があっても潜在不可', () => {
