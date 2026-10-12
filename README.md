@@ -4,7 +4,7 @@
 手入力したキャラクターと装備の現状から、「次にどの装備をどう強化すると、かけたメルに対して戦闘力が最も伸びるか」を
 **戦闘力上昇 ÷ 期待コスト(メル)** の順に並べて表示します。msuplanner.com の「スペックアップ」タブを JMS 向けに作り直したものです。
 
-- 静的サイト(Vite + React)。GitHub Pages で配信できます。
+- 静的サイト(Vite + React)。GitHub Pages で配信しています: **https://yurari-en.github.io/jms-planner/**(2026-10-12 公開)
 - 実行時に外部サーバーへは一切アクセスしません。キャラデータはブラウザの localStorage にだけ保存されます。
 - 仕様の正本は [`docs/DESIGN.md`](docs/DESIGN.md)、調査メモは [`docs/research/`](docs/research/) です。
 
