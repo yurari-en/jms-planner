@@ -67,7 +67,14 @@ export function resolveEquip(eq: EquipInput, deps: EquipResolveDeps): EquipMeta 
   const starSlot = rules.star || kind === 'secondary';
   const masterAllows = item ? item.tuc > 0 && item.exGrade !== 1 : rules.star;
   const canStar = starSlot && masterAllows && !superior && !eq.overrides?.sfDisabled;
-  const canPotential = rules.potential && !(item?.noPotential === 1) && !eq.overrides?.potDisabled;
+  // 潜在の可否: 部位の規則に加えて、マスタの強化可能回数(tuc)が 0 の装備(シードリング・特製武器・イベント装備など)は潜在不可。
+  // ただし補助武器・エンブレム・盾(デーモンのフォースシールド等)は設計上 tuc 0 でも潜在可。wz に noPotential が無い装備
+  // (シードリング等)の判定はこの規則による(ゲーム側の規則の推定、2026-10-12)。手入力の装備は部位の規則のまま。
+  // 盾は補助武器の枠に装備するため通常 kind は 'secondary' になるが、念のため 'shield' も含める。
+  const potKindAllowsTuc0 = kind === 'secondary' || kind === 'emblem' || kind === 'shield';
+  const masterAllowsPot = item ? item.tuc > 0 || potKindAllowsTuc0 : true;
+  const canPotential =
+    rules.potential && masterAllowsPot && !(item?.noPotential === 1) && !eq.overrides?.potDisabled;
   const maxStar = eq.overrides?.maxStar ?? maxStarByLevel(deps.starforce, lv);
   return {
     slot: eq.slot,

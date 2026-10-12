@@ -349,6 +349,21 @@ describe('planner: マスタによる★可否', () => {
     const r = buildPlan(withRing(1113306), sOnly, ctx);
     expect(sfSteps(r.steps).filter((s) => s.slot === 'ring1').length).toBeGreaterThan(0);
   });
+
+  // 潜在の可否: 強化可能回数 0 のシードリングは潜在不可なので、潜在・アディのステップも出ない
+  const potOnly = settings({ include: { starforce: false, potential: true, additional: true } });
+  const potSteps = (steps: { kind: string; slot?: string }[]) =>
+    steps.filter((s) => (s.kind === 'potential' || s.kind === 'additional') && s.slot === 'ring1');
+
+  it('リストレイントリング(tuc 0)は潜在・アディのステップが出ない', () => {
+    const r = buildPlan(withRing(1113098), potOnly, ctx);
+    expect(potSteps(r.steps)).toEqual([]);
+  });
+
+  it('強化可能回数がある通常の指輪には潜在・アディのステップが出る(対照)', () => {
+    const r = buildPlan(withRing(1113306), potOnly, ctx);
+    expect(potSteps(r.steps).length).toBeGreaterThan(0);
+  });
 });
 
 describe('planner: rankFlames', () => {

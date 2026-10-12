@@ -291,6 +291,7 @@ export interface FlameState { str: number; dex: number; int: number; luk: number
 | ポケット | × | × | ○ |
 
 - ★の可否(2026-10-12): ★可 = 部位が対象(補助武器を含む) かつ 強化可能回数(`tuc`) > 0 かつ 装備固有の成長システム(`exGrade`)でない。専用呪文書のみの装備(`onlyUpgrade`、デスティニー武器)は★可。手入力の装備は上の表のとおり。
+- 潜在の可否(2026-10-12): 潜在可 = 部位が対象 かつ (強化可能回数(`tuc`) > 0 または 部位が補助武器・エンブレム・盾) かつ `noPotential` でない。wz はシードリングに noPotential を持たないため、tuc 0 を潜在不可の印として使う(ゲーム側の規則の推定)。手入力の装備は部位の規則のまま。
 - ★の上限: `maxStarByLevel`。`superior=1` は v1 では ★の計算対象外(表示のみ)。`overrides.maxStar` で上書き可。
 - 「ボス報酬」(炎が4行・段階+2): `items.json` の `boss`。`flame.json bossItems.nonBossExceptions` に名前が一致するものは非ボス扱い。上書き可。
 

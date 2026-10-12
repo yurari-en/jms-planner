@@ -162,13 +162,16 @@ export default function EquipEditor({ slot }: { slot: EquipSlot }) {
         ? 'シュペリアル装備の★は計算に使いません'
         : null;
 
+  // 潜在不可の理由: 部位 / wz の noPotential / 強化可能回数 0(補助武器・エンブレム・盾を除く。シードリング等)
   const potNote = !rules.potential
     ? 'この部位には潜在能力がありません'
     : meta.item?.noPotential === 1
       ? 'この装備には潜在能力がありません'
-      : eq.overrides?.potDisabled
-        ? '潜在を計算しない設定です(詳細設定)'
-        : null;
+      : meta.item && !rawMeta.canPotential
+        ? 'この装備には潜在能力を付けられません(強化可能回数 0)'
+        : eq.overrides?.potDisabled
+          ? '潜在を計算しない設定です(詳細設定)'
+          : null;
 
   return (
     <section aria-labelledby={headingId} className="min-w-0 space-y-3">
@@ -287,7 +290,7 @@ export default function EquipEditor({ slot }: { slot: EquipSlot }) {
       )}
 
       {/* 潜在 / アディ */}
-      {meta.part && rules.potential && meta.item?.noPotential !== 1 ? (
+      {meta.part && rawMeta.canPotential ? (
         <div className="min-w-0 space-y-2">
           {potNote && <Note>{potNote}</Note>}
           <PotentialEditor

@@ -34,6 +34,12 @@ export const UNRESOLVED_ITEMS: { item: string; handling: string; change: string 
     handling: '強化可能回数>0 かつ 装備固有の成長システムでない装備だけ★可(補助武器も同じ)',
     change: 'データ(items.json の tuc / exGrade)',
   },
+  {
+    item: '潜在の可否(部位以外)',
+    handling:
+      '強化可能回数>0 の装備だけ潜在可(補助武器・エンブレム・盾は tuc 0 でも可)。シードリング等は潜在不可',
+    change: 'データ(items.json の tuc / noPotential)',
+  },
 ];
 
 export const VIP_LABEL_JA: Record<VipRank, string> = {
