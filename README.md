@@ -114,6 +114,17 @@ npm run preview    # dist/ をローカル配信(/jms-planner/ 配下)
 
 ディレクトリ構成は `docs/DESIGN.md` §2 のとおりです。計算ロジックは `src/domain/`、データの型・読み込み・索引は `src/data/`、状態は `src/store/`、画面は `src/components/`、重い計算は `src/worker/`(Comlink)です。
 
+### ローカルで配信を検証する(GitHub Pages 相当)
+
+```bash
+npm run build            # dist/ を /jms-planner/ 前提で生成
+npm run preview:static   # http://127.0.0.1:4174/jms-planner/ で配信(SPA フォールバック無し)
+```
+
+- `npm run preview`(vite preview)と違い、GitHub Pages と同じく**ベースパス配下だけを配信し、存在しないファイルは 404** を返します。存在しないアイコンなど、vite preview では隠れる 404 をここで検出できます。
+- 別のベースパスを確かめるときは `VITE_BASE=/foo/ npm run build` のあと `VITE_BASE=/foo/ npm run preview:static`。ポートは `PORT=8080` のように変えられます。
+- 手元(127.0.0.1)だけで動き、ファイルは外部に出ません(公開不要)。
+
 ## データ更新手順(開発者向け)
 
 ネットに接続できる手元で実行します。CI では実行しません(生成済みの `public/data` と `public/icons` をコミットします)。
@@ -140,6 +151,7 @@ npm run build
 
 - **無料プランでは非公開リポジトリで GitHub Pages を使えません**(API が `Your current plan does not support GitHub Pages for this repository` を返す)。
   公開リポジトリにするか、Pages が使えるプランにしてください。公開にする場合、ソースと装備アイコン(NEXON 権利物)も公開されます。
+- 公開したくない場合は Pages を使わず、上記の「ローカルで配信を検証する(GitHub Pages 相当)」で代替できます(非公開リポジトリは無料プランでは Pages 不可)。
 - `gh` のトークンにワークフローファイルを push する権限(`workflow` スコープ)が必要です。無い場合は次を実行してブラウザで承認します。
 
 ```bash

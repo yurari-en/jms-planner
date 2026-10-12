@@ -11,6 +11,7 @@
     "prebuild": "node scripts/build-manifest.mjs",
     "build": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && vite build",
     "preview": "vite preview",
+    "preview:static": "node scripts/serve-dist.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint . && prettier --check .",

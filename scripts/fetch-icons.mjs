@@ -3,7 +3,8 @@
 // public/icons/items/{id}.png に保存する(既にあるファイルはスキップ)。
 //   node scripts/fetch-icons.mjs [--version 419]
 // エンドポイント: GET https://maplestory.io/api/JMS/{ver}/item/{id}/icon  (image/png, 2026-10-12 確認)
-// 追加で UI 用アイコン(キューブ・転生の炎)も public/icons/ui/ に保存する。
+// 追加で UI 用アイコン(キューブ・転生の炎)も public/icons/ui/{name}.png に保存し、
+// 同じ画像を public/icons/items/{id}.png にも置く(cubes.json の itemIdIcon がそのまま解決できるように)。
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -57,8 +58,14 @@ async function main() {
     }
   }));
   for (const [name, id] of Object.entries(UI_ICONS)) {
-    const r = await save(`https://maplestory.io/api/JMS/${VER}/item/${id}/icon`, path.join(ROOT, `icons/ui/${name}.png`));
+    const uiFile = path.join(ROOT, `icons/ui/${name}.png`);
+    const r = await save(`https://maplestory.io/api/JMS/${VER}/item/${id}/icon`, uiFile);
     stats[r] = (stats[r] || 0) + 1;
+    // icons/items/{id}.png にも複製する(既にあればそのまま。ui 側が無ければ何もしない)
+    const itemFile = path.join(ROOT, `icons/items/${id}.png`);
+    try { await fs.access(itemFile); } catch {
+      try { await fs.copyFile(uiFile, itemFile); stats.uiCopied = (stats.uiCopied || 0) + 1; } catch {}
+    }
   }
   console.log('\n', stats);
 }

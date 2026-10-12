@@ -47,6 +47,16 @@ describe('public/data の実ファイル', () => {
     expect(items.some((i) => i.slot === 'secondary' && i.sub === 'Medal')).toBe(true);
   });
 
+  it('cubes.json の itemIdIcon に対応するアイコンが public/icons/items にある', () => {
+    const r = cubesSchema.safeParse(read('cubes.json'));
+    expect(r.success).toBe(true);
+    if (!r.success) return;
+    for (const cube of r.data.cubes) {
+      const icon = path.resolve(here, '../../public/icons/items', `${cube.itemIdIcon}.png`);
+      expect(fs.existsSync(icon), `${cube.itemIdIcon}.png が無い`).toBe(true);
+    }
+  });
+
   it('kms-cube-tables.json: 各行の確率合計が 100%、表のキーが揃っている', () => {
     const t = read('potential/kms-cube-tables.json') as CubeTables;
     for (const dist of t.lineDists) {
