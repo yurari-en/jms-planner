@@ -6,6 +6,7 @@ import type {
   CubeTables,
   CubesMaster,
   FlameMaster,
+  ItemMaster,
   JobsMaster,
   MasterData,
   StarforceMaster,
@@ -301,6 +302,52 @@ describe('planner: buildPlan', () => {
     expect(targetLineLabel({ ...cat, key: 'statPerLv' }, 2, 'STR')).toBe(
       'キャラクターレベル9ごとにSTR : +2',
     );
+  });
+});
+
+// マスタで★不可の指輪(強化可能回数 0 のシードリング、装備固有の成長システム(exGrade)のアウェイクリング)には★のステップを出さない
+describe('planner: マスタによる★可否', () => {
+  const ring = (id: number, name: string, lv: number, tuc: number, exGrade: 0 | 1): ItemMaster => ({
+    id,
+    name,
+    lv,
+    slot: 'ring',
+    sub: 'Ring',
+    jobs: ['Beginner'],
+    boss: 0,
+    superior: 0,
+    setId: null,
+    setName: null,
+    tuc,
+    onlyUpgrade: exGrade,
+    exGrade,
+    exceptUpgrade: 0,
+    noPotential: 0,
+    base: { str: 4, dex: 4, int: 4, luk: 4, att: 4, matt: 4, hp: 0 },
+  });
+  const RINGS = [
+    ring(1113098, 'リストレイントリング', 110, 0, 0),
+    ring(1114318, 'アウェイクリング', 120, 3, 1),
+    ring(1113306, '凄まじい恐怖', 200, 3, 0),
+  ];
+  const ctx = planContextFrom({
+    ...DATA,
+    items: { meta: { source: 'test', asOf: '2026-01-01', minLevel: 0 }, items: RINGS },
+  });
+  const sOnly = settings({ include: { starforce: true, potential: false, additional: false } });
+  const withRing = (itemId: number): CharacterInput =>
+    hero([{ ...emptyEquip('ring1'), itemId, star: 0 }]);
+
+  it('リストレイントリング(tuc 0)とアウェイクリング(exGrade)は★のステップが出ない', () => {
+    for (const id of [1113098, 1114318]) {
+      const r = buildPlan(withRing(id), sOnly, ctx);
+      expect(sfSteps(r.steps).filter((s) => s.slot === 'ring1')).toEqual([]);
+    }
+  });
+
+  it('強化可能回数がある通常の指輪には★のステップが出る(対照)', () => {
+    const r = buildPlan(withRing(1113306), sOnly, ctx);
+    expect(sfSteps(r.steps).filter((s) => s.slot === 'ring1').length).toBeGreaterThan(0);
   });
 });
 

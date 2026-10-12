@@ -329,6 +329,8 @@ export interface ItemMaster {
   setName: string | null;
   tuc: number;
   onlyUpgrade: 0 | 1;
+  /** 装備固有の成長システムを持つ装備(アウェイクリング等。★不可) */
+  exGrade: 0 | 1;
   exceptUpgrade: 0 | 1;
   noPotential: 0 | 1;
   base: { str: number; dex: number; int: number; luk: number; att: number; matt: number; hp: number };

@@ -50,6 +50,47 @@ describe('public/data の実ファイル', () => {
     expect(items.filter((i) => untrimmed(i.name) || untrimmed(i.setName)).map((i) => i.id)).toEqual(
       [],
     );
+    // 一覧 API が返さない JMS 独自 ID 範囲(typeInfo が Unknown)を wz から補完できている
+    const byId = new Map(items.map((i) => [i.id, i]));
+    expect(byId.get(1354309)).toMatchObject({
+      name: '天魂降臨霊符',
+      slot: 'secondary',
+      sub: '霊符',
+      tuc: 9,
+    });
+    expect(byId.get(1191103)).toMatchObject({
+      name: 'ゴールドブロッサムエンブレム',
+      slot: 'emblem',
+    });
+    expect(byId.get(1191101)).toMatchObject({
+      name: 'ゴールドクレセントエンブレム',
+      slot: 'emblem',
+    });
+    expect(byId.get(1722400)).toMatchObject({ name: 'アストラ狐玉', slot: 'secondary', lv: 200 });
+    expect(items.filter((i) => i.slot === 'emblem').length).toBeGreaterThanOrEqual(40);
+    // onlyUpgrade は wz では専用呪文書 ID の一覧ノード → 1 に変換できている。★不可の印は exGrade(成長システム)
+    expect(byId.get(1114318)).toMatchObject({
+      name: 'アウェイクリング',
+      onlyUpgrade: 1,
+      exGrade: 1,
+      tuc: 3,
+    });
+    expect(byId.get(1212145)).toMatchObject({
+      name: 'デスティニーシャイニングロッド',
+      exGrade: 0,
+      onlyUpgrade: 1,
+      tuc: 9,
+    });
+    const exGradeCount = items.filter((i) => i.exGrade === 1).length;
+    expect(exGradeCount).toBeGreaterThanOrEqual(1);
+    // 2026-10-12 時点で 299 件(イベント成長武器・アウェイクリング等)。大きく増えたら判定の見直しを疑う
+    expect(exGradeCount).toBeLessThanOrEqual(350);
+    expect(byId.get(1113098)).toMatchObject({ tuc: 0 });
+    expect(items.filter((i) => i.onlyUpgrade === 1).length).toBeGreaterThan(0);
+    for (const id of [1354309, 1191103, 1191101, 1722400]) {
+      const icon = path.resolve(here, '../../public/icons/items', `${id}.png`);
+      expect(fs.existsSync(icon), `${id}.png が無い`).toBe(true);
+    }
   });
 
   it('cubes.json の itemIdIcon に対応するアイコンが public/icons/items にある', () => {

@@ -262,6 +262,7 @@ export const itemSchema = z
     setName: z.string().nullable(),
     tuc: num,
     onlyUpgrade: flag,
+    exGrade: flag,
     exceptUpgrade: flag,
     noPotential: flag,
     base: z

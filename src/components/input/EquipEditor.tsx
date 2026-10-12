@@ -143,13 +143,18 @@ export default function EquipEditor({ slot }: { slot: EquipSlot }) {
   const missingItem = eq.itemId != null && !idx.itemsById.has(eq.itemId);
   const planWarnings = warningsText ? warningsText.split('\n') : [];
 
-  const starNote = !rules.star
-    ? 'この部位は★強化できません'
-    : meta.superior
-      ? 'シュペリアル装備は v1 では計算対象外'
-      : eq.overrides?.sfDisabled
-        ? '★強化しない設定です(詳細設定)'
-        : null;
+  // ★不可の理由: マスタの装備なら強化可能回数 0 / 装備固有の成長システム(exGrade)(補助武器の霊符など部位で★不可でも tuc があれば★可)
+  const starSlot = rules.star || kind === 'secondary';
+  const starNote =
+    starSlot && !rawMeta.canStar && meta.item && !meta.superior
+      ? 'この装備は★強化できません(強化可能回数 0 または専用の成長システム)'
+      : !rules.star && !rawMeta.canStar
+        ? 'この部位は★強化できません'
+        : meta.superior
+          ? 'シュペリアル装備は v1 では計算対象外'
+          : eq.overrides?.sfDisabled
+            ? '★強化しない設定です(詳細設定)'
+            : null;
   const starWarning =
     eq.star > meta.maxStar
       ? `★が上限(${meta.maxStar})を超えています`

@@ -60,7 +60,13 @@ export function resolveEquip(eq: EquipInput, deps: EquipResolveDeps): EquipMeta 
   const baseMatt = item?.base.matt ?? custom?.baseMatt ?? 0;
   const canFlame =
     (rules.flame || (name !== '' && deps.isFlameException(name))) && !eq.overrides?.flameDisabled;
-  const canStar = rules.star && !superior && !eq.overrides?.sfDisabled;
+  // ★可否: 部位の規則に加えて、マスタの強化可能回数(tuc)が 0 の装備(シードリング・特製武器など)と、
+  // 装備固有の成長システムを持つ装備(exGrade: アウェイクリング・コスモスリング・ベンジャンスリング等)は★不可。
+  // onlyUpgrade(専用呪文書のみ)は★不可の印ではない(デスティニー武器は★可)。補助武器は tuc>0 のものだけ★可(例: カンナの霊符)。
+  // マスタの無い手入力の装備は部位の規則のまま(手入力の補助武器は★不可)。
+  const starSlot = rules.star || kind === 'secondary';
+  const masterAllows = item ? item.tuc > 0 && item.exGrade !== 1 : rules.star;
+  const canStar = starSlot && masterAllows && !superior && !eq.overrides?.sfDisabled;
   const canPotential = rules.potential && !(item?.noPotential === 1) && !eq.overrides?.potDisabled;
   const maxStar = eq.overrides?.maxStar ?? maxStarByLevel(deps.starforce, lv);
   return {

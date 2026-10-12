@@ -4,3 +4,6 @@ dist/
 *.local
 .vite/
 coverage/
+
+# maplestory.io の調査キャッシュ(fetch-jms-items.mjs)
+scripts/.cache/

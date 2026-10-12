@@ -50,6 +50,7 @@ function item(
     setName: null,
     tuc: 0,
     onlyUpgrade: 0,
+    exGrade: 0,
     exceptUpgrade: 0,
     noPotential: 0,
     base: { str: 0, dex: 0, int: 0, luk: 0, att: 0, matt: 0, hp: 0 },

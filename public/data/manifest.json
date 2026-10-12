@@ -1,6 +1,6 @@
 {
- "version": "36f229d27d",
- "generatedAt": "2026-10-12T01:41:46.427Z",
+ "version": "bf02be9ab4",
+ "generatedAt": "2026-10-12T02:46:13.225Z",
  "files": {
   "cubes.json": {
    "sha": "40340a11",
@@ -13,9 +13,9 @@
    "asOf": null
   },
   "items.json": {
-   "sha": "763d05de",
-   "bytes": 1304733,
-   "asOf": "2026-10-11"
+   "sha": "bc2addeb",
+   "bytes": 1448971,
+   "asOf": "2026-10-12"
   },
   "jobs.json": {
    "sha": "e44f486a",
